@@ -16,7 +16,7 @@ namespace Web_Projekat_PR111_2019.Models
         public DateTime VrijemeDostave { get; set; }
         public DateTime VrijemePOrudzbine { get; set; }
         public Kupac Kupac { get; set; }
-        public int IDKupca { get; set; }
+        public string IDKupca { get; set; }
         public double Dostava { get; } = 100;
     }
 }

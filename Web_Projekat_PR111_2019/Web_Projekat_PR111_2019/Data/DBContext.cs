@@ -18,7 +18,7 @@ namespace Web_Projekat_PR111_2019.Data
         public DbSet<ArtikalIPorudzbina> ArtikliIPorudzbine { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        { 
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DBContext).Assembly);
 

@@ -3728,11 +3728,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\Web_Projekat_PR111_2019\\Web_Projekat_PR111_2019\\Web_Projekat_PR111_2019.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\Web2_Projekat\\Web_Projekat_PR111_2019\\Web_Projekat_PR111_2019\\Web_Projekat_PR111_2019.csproj",
       "projectName": "Web_Projekat_PR111_2019",
-      "projectPath": "C:\\Users\\User\\Desktop\\Web_Projekat_PR111_2019\\Web_Projekat_PR111_2019\\Web_Projekat_PR111_2019.csproj",
+      "projectPath": "C:\\Users\\User\\Desktop\\Web2_Projekat\\Web_Projekat_PR111_2019\\Web_Projekat_PR111_2019\\Web_Projekat_PR111_2019.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\Web_Projekat_PR111_2019\\Web_Projekat_PR111_2019\\obj\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\Web2_Projekat\\Web_Projekat_PR111_2019\\Web_Projekat_PR111_2019\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

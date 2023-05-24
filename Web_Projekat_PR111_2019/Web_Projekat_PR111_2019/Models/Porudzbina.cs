@@ -4,19 +4,18 @@ namespace Web_Projekat_PR111_2019.Models
 {
     public class Porudzbina
     {
-        public int Id { get; set; }
-        public Artikal Artikal { get; set; }
+        public int Id { get; set; } 
         public List<ArtikalIPorudzbina> ArtikliIPorudzbine { get; set; }
-        public string Adresa { get; set; }
+        public string AdresaIsporuke { get; set; }
         public string KomentarPorudzbine { get; set; }
-        public int Kolicina { get; set; }
-        public float Cijena { get; set; }
-        public string Email { get; set; }
-        public PorudzbinaStatus StatusPorudzbine { get; set; }
-        public DateTime VrijemeDostave { get; set; }
-        public DateTime VrijemePOrudzbine { get; set; }
-        public Kupac Kupac { get; set; }
-        public string IDKupca { get; set; }
-        public double Dostava { get; } = 100;
+        
+        public double CijenaPorudzbine { get; set; }
+        public StatusPorudzbine StatusPorudzbine { get; set; }
+        public DateTime VrijemeIsporuke { get; set; }
+        public DateTime VrijemePorudzbine { get; set; }
+       
+        public Korisnik Korisnik { get; set; }
+        public int IdKorisnika { get; set; }
+        public double DostavaCijena { get; } = 100;
     }
 }

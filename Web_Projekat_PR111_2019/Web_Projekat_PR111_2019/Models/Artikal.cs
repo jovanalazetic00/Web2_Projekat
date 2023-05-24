@@ -8,9 +8,9 @@
         public int KolicinaArtikla { get; set; }
         public string Opis { get; set; }
         public byte[] Slika { get; set; }
-        public Prodavac Prodavac { get; set; }
-        public string IDProdavca { get; set; }
         public List<ArtikalIPorudzbina> ArtikliIporudzbine { get; set; }
-
+        public bool Obrisan { get; set; }
+        public Korisnik Korisnik { get; set; }
+        public int IdKorisnika { get; set; }
     }
 }

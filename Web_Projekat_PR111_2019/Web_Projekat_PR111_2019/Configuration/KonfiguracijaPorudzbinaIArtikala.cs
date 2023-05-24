@@ -8,12 +8,19 @@ namespace Web_Projekat_PR111_2019.Configurations
     {
         public void Configure(EntityTypeBuilder<ArtikalIPorudzbina> builder)
         {
-            builder.HasKey(op => new { op.IDPorudzbine, op.IDArtikla });
+            builder.HasKey(aip => new { aip.IDPorudzbine, aip.IDArtikla });
 
-            builder.HasOne(p => p.Porudzbina).WithMany(p => p.ArtikliIPorudzbine).IsRequired().OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(aip => aip.Artikal)
+                .WithMany(aip => aip.ArtikliIporudzbine)
+                .HasForeignKey(aip => aip.IDArtikla)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
-
-            builder.HasOne(p => p.Artikal).WithMany(p => p.ArtikliIporudzbine).IsRequired().OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(aip => aip.Porudzbina)
+                .WithMany(aip => aip.ArtikliIPorudzbine)
+                .HasForeignKey(aip => aip.IDPorudzbine)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

@@ -57,6 +57,18 @@
               "target": "Package",
               "version": "[7.0.5, )"
             },
+            "Microsoft.IdentityModel": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "RavenDB.Client": {
+              "target": "Package",
+              "version": "[5.4.104, )"
+            },
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[4.9.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"

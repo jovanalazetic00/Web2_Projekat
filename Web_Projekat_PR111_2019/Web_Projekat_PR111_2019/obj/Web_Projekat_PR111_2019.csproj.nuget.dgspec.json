@@ -43,6 +43,10 @@
               "target": "Package",
               "version": "[10.1.1, )"
             },
+            "BCrypt.Net": {
+              "target": "Package",
+              "version": "[0.1.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.5, )"
@@ -60,6 +64,14 @@
             "Microsoft.IdentityModel": {
               "target": "Package",
               "version": "[7.0.0, )"
+            },
+            "Octokit": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Portable.BouncyCastle": {
+              "target": "Package",
+              "version": "[1.9.0, )"
             },
             "RavenDB.Client": {
               "target": "Package",

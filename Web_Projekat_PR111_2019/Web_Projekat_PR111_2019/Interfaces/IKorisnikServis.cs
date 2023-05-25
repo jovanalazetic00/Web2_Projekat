@@ -12,5 +12,6 @@ namespace Web_Projekat_PR111_2019.Interfaces
         Task<DTOKorisnik> Registracija(DTORegistracija DtoReg);
         Task<DTOKorisnik> VerifikacijaPrihvacena(int id);
         Task<DTOKorisnik> VerifikacijaOdbijena(int id);
+        
     }
 }

@@ -17,7 +17,7 @@ namespace Web_Projekat_PR111_2019.Models
         public DateTime DatumRodjenja { get; set; }
 
         public string Adresa { get; set; }
-        public string Slika { get; set; }
+        public byte[] Slika { get; set; }
         public TipKorisnika TipKorisnika {get; set; }
         public StatusKorisnika StatusKorisnika { get; set; }
         public List<Artikal> Artikli { get; set; }

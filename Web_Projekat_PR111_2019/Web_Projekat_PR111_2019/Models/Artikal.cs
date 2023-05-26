@@ -2,7 +2,7 @@
 {
     public class Artikal
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Naziv { get; set; }
         public double Cijena { get; set; }
         public int KolicinaArtikla { get; set; }

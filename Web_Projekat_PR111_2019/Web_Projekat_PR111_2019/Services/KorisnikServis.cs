@@ -13,7 +13,6 @@ using Web_Projekat_PR111_2019.Exceptions;
 using Web_Projekat_PR111_2019.Repositories;
 using Web_Projekat_PR111_2019.Data;
 using Microsoft.EntityFrameworkCore;
-using Octokit;
 
 namespace Web_Projekat_PR111_2019.Services
 {

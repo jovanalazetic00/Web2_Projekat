@@ -17,6 +17,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
 builder.Services.AddScoped<IKorisnikServis, KorisnikServis>();
 
+builder.Services.AddScoped<IEmailServis, EmailServis>();
+
 builder.Services.AddDbContext<DBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionWithDBWebProjekat"));

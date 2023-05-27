@@ -15,8 +15,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
-builder.Services.AddScoped<IKorisnikServis, KorisnikServis>();
 
+
+builder.Services.AddScoped<IKorisnikServis, KorisnikServis>();
+builder.Services.AddScoped<ILogovanjeServis, LogovanjeServis>();
 builder.Services.AddScoped<IEmailServis, EmailServis>();
 
 builder.Services.AddDbContext<DBContext>(options =>
@@ -41,6 +43,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+
+
+
+
+
+
+app.Run();
 
 app.UseHttpsRedirection();
 

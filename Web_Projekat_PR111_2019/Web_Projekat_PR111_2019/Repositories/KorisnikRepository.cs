@@ -4,6 +4,7 @@ using Web_Projekat_PR111_2019.Data;
 using Web_Projekat_PR111_2019.DTO;
 using Web_Projekat_PR111_2019.Interfaces;
 using Web_Projekat_PR111_2019.Models;
+using static Raven.Client.Documents.Commands.MultiGet.GetRequest;
 
 namespace Web_Projekat_PR111_2019.Repositories
 {
@@ -141,6 +142,11 @@ namespace Web_Projekat_PR111_2019.Repositories
                 return null;// Ovde možete dodati odgovarajući rukovanje greškama, logiku ili poruke grešaka prema potrebi
                 throw; // Ponovno izuzimanje izuzetke kako bi se preneo gore
             }
+        }
+
+        public async Task<Korisnik> GetKorisnikByEmail(string email)
+        {
+            return await DBC.Korisnici.FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }

@@ -12,5 +12,6 @@ namespace Web_Projekat_PR111_2019.Interfaces
         Task<Korisnik> VerifikacijaPrihvacena(int id);
         Task<Korisnik> VerifikacijaOdbijena(int id);
         Task<Korisnik> Registracija(Korisnik korisnik);
+        Task<Korisnik> GetKorisnikByEmail(string email);
     }
 }

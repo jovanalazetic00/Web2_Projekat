@@ -13,9 +13,9 @@ namespace Web_Projekat_PR111_2019.Controllers
         {
             korisnikServis = kServis;
         }
-        [HttpGet("GetAll_Users")]
+        [HttpGet("GetSviKorisnici")]
         [Authorize(Roles="Administartor")]
-        public async Task<IActionResult> GetSvi_Korisnici()
+        public async Task<IActionResult> GetSviKorisnici()
         {
             try
             {
@@ -34,9 +34,9 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("GetSvi_Prodavci")]
+        [HttpGet("GetSviProdavci")]
         [Authorize(Roles = "Administartor")]
-        public async Task<IActionResult> GetSvi_Prodavci()
+        public async Task<IActionResult> GetSviProdavci()
         {
             try
             {
@@ -95,7 +95,63 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        
+        [HttpPut("VerifikacijaPrihvacena/id")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> VerifikacijaPrihvacena(int id)
+        {
+            try
+            {
+                DTOKorisnik korisnik = await korisnikServis.VerifikacijaPrihvacena(id);
+                if (korisnik == null)
+                {
+                    return BadRequest("Korisnik sa datim ID-jem nije pronađen.");
+                }
+                return Ok(korisnik);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Greška prilikom prihvatanja verifikacije: {e.Message}");
+            }
+        }
+
+        [HttpPut("VerifikacijaOdbijena/id")]
+        [Authorize(Roles = "Administartor")]
+        public async Task<IActionResult> VerifikacijaOdbijena(int id)
+        {
+            try
+            {
+                DTOKorisnik korisnik = await korisnikServis.VerifikacijaOdbijena(id);
+                if (korisnik == null)
+                {
+                    return BadRequest("Korisnik sa datim ID-jem nije pronađen.");
+                }
+                return Ok(korisnik);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Greška prilikom odbijanja verifikacije: {ex.Message}");
+            }
+        }
+
+        [Authorize]
+        [HttpGet("GetMojProfil")]
+        public async Task<IActionResult> GetMojProfil()
+        {
+            try
+            {
+                int id = int.Parse(User.Claims.First(u => u.Type == "KorisnikId").Value);
+                DTOKorisnik korisnik = await korisnikServis.GetById(id);
+                if (korisnik == null)
+                {
+                    return BadRequest("Korisnik nije pronađen.");
+                }
+                return Ok(korisnik);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Greška prilikom dohvatanja korisničkog profila: {e.Message}");
+            }
+        }
 
     }
 }

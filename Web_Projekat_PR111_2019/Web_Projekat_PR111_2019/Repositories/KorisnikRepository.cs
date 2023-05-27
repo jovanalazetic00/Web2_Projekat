@@ -68,8 +68,8 @@ namespace Web_Projekat_PR111_2019.Repositories
             }
             catch (Exception e)
             {
-                return null;// Ovde možete dodati odgovarajući rukovanje greškama, logiku ili poruke grešaka prema potrebi
-                throw; // Ponovno izuzimanje izuzetke kako bi se preneo gore
+                return null;
+                throw; 
             }
         }
 
@@ -84,7 +84,7 @@ namespace Web_Projekat_PR111_2019.Repositories
 
             stariKorisnik.Ime = noviKorisnik.Ime;
             stariKorisnik.Email = noviKorisnik.Email;
-            // Dodajte ostala polja koja želite ažurirati
+            
 
             try
             {
@@ -93,8 +93,8 @@ namespace Web_Projekat_PR111_2019.Repositories
             }
             catch (Exception e)
             {
-                return null;// Ovde možete dodati odgovarajući rukovanje greškama, logiku ili poruke grešaka prema potrebi
-                throw; // Ponovno izuzimanje izuzetke kako bi se preneo gore
+                return null;
+                throw; 
             }
         }
 
@@ -116,8 +116,8 @@ namespace Web_Projekat_PR111_2019.Repositories
             }
             catch (Exception e)
             {
-                return null;// Ovde možete dodati odgovarajući rukovanje greškama, logiku ili poruke grešaka prema potrebi
-                throw; // Ponovno izuzimanje izuzetke kako bi se preneo gore
+                return null;
+                throw; 
             }
         }
 
@@ -139,8 +139,8 @@ namespace Web_Projekat_PR111_2019.Repositories
             }
             catch (Exception e)
             {
-                return null;// Ovde možete dodati odgovarajući rukovanje greškama, logiku ili poruke grešaka prema potrebi
-                throw; // Ponovno izuzimanje izuzetke kako bi se preneo gore
+                return null;
+                throw; 
             }
         }
 

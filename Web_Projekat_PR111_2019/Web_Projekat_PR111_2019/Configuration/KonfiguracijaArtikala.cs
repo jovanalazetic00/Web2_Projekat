@@ -8,17 +8,23 @@ namespace Web_Projekat_PR111_2019.Configuration
     {
         public void Configure(EntityTypeBuilder<Artikal> builder)
         {
-            builder.HasKey(a => a.Id);
-            builder.Property(a => a.Id).ValueGeneratedOnAdd();
-            builder.Property(a => a.Naziv).IsRequired().HasMaxLength(50);
+            builder.HasKey(p => p.ArtikalId);
+            builder.Property(a => a.ArtikalId).ValueGeneratedOnAdd();
+            builder.Property(a => a.Naziv).IsRequired().HasMaxLength(20);
             builder.Property(a => a.Cijena).IsRequired();
             builder.Property(a => a.KolicinaArtikla).IsRequired();
-            builder.Property(a => a.Obrisan).HasDefaultValue(false);
+            builder.Property(a => a.Opis);
 
             builder.HasOne(a => a.Korisnik)
-                .WithMany(a => a.Artikli)
-                .HasForeignKey(a => a.IdKorisnika)
+               .WithMany(k => k.Artikli)
+               .HasForeignKey(a => a.IdKorisnika)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(a => a.ArtikliIPorudzbine)
+                .WithOne(s => s.Artikal)
+                .HasForeignKey(s => s.IDArtikla)
                 .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

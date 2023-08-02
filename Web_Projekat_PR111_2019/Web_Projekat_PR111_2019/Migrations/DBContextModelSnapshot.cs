@@ -22,79 +22,43 @@ namespace Web_Projekat_PR111_2019.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Administrator", b =>
-                {
-                    b.Property<string>("KorisnickoIme")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Adresa")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.Property<DateTime>("DatumRodjenja")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("ImePrezime")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Lozinka")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Slika")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("KorisnickoIme");
-
-                    b.HasIndex("KorisnickoIme")
-                        .IsUnique();
-
-                    b.ToTable("Administratori");
-                });
-
             modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Artikal", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("ArtikalId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArtikalId"));
 
                     b.Property<double>("Cijena")
                         .HasColumnType("float");
 
-                    b.Property<string>("IDProdavca")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("IdKorisnika")
+                        .HasColumnType("int");
 
                     b.Property<int>("KolicinaArtikla")
                         .HasColumnType("int");
 
                     b.Property<string>("Naziv")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("Obrisan")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Opis")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Slika")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ArtikalId");
 
-                    b.HasIndex("IDProdavca");
+                    b.HasIndex("IdKorisnika");
 
-                    b.ToTable("Artikal");
+                    b.ToTable("Artikli");
                 });
 
             modelBuilder.Entity("Web_Projekat_PR111_2019.Models.ArtikalIPorudzbina", b =>
@@ -105,202 +69,160 @@ namespace Web_Projekat_PR111_2019.Migrations
                     b.Property<int>("IDArtikla")
                         .HasColumnType("int");
 
-                    b.Property<string>("ArtikalId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("CijenaPorudzbine")
-                        .HasColumnType("int");
-
                     b.Property<int>("KolicinaArtikla")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PorudzbinaId")
                         .HasColumnType("int");
 
                     b.HasKey("IDPorudzbine", "IDArtikla");
 
-                    b.HasIndex("ArtikalId");
-
-                    b.HasIndex("PorudzbinaId");
+                    b.HasIndex("IDArtikla");
 
                     b.ToTable("ArtikliIPorudzbine");
                 });
 
-            modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Kupac", b =>
+            modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Korisnik", b =>
                 {
-                    b.Property<string>("KorisnickoIme")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("IdKorisnika")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdKorisnika"));
 
                     b.Property<string>("Adresa")
                         .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DatumRodjenja")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ImePrezime")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Lozinka")
+                    b.Property<string>("Ime")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Slika")
+                    b.Property<string>("KorisnickoIme")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("Lozinka")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StatusPorudzbine")
-                        .HasColumnType("int");
+                    b.Property<bool>("Obrisan")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
-                    b.HasKey("KorisnickoIme");
+                    b.Property<string>("PotvrdaLozinke")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PotvrdaRegistracije")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Prezime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Slika")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("StatusVerifrikacije")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TipKorisnika")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Verifikovan")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("IdKorisnika");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.HasIndex("KorisnickoIme")
                         .IsUnique();
 
-                    b.ToTable("Kupac");
+                    b.ToTable("Korisnici");
                 });
 
             modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Porudzbina", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdPorudzbine")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPorudzbine"));
 
-                    b.Property<string>("Adresa")
+                    b.Property<string>("AdresaIsporuke")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
-                    b.Property<string>("ArtikalId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<double>("CijenaPorudzbine")
+                        .HasColumnType("float");
 
-                    b.Property<float>("Cijena")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IDKupca")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Kolicina")
+                    b.Property<int>("IdKorisnika")
                         .HasColumnType("int");
 
                     b.Property<string>("KomentarPorudzbine")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProdavacKorisnickoIme")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<bool>("Obrisan")
+                        .HasColumnType("bit");
 
-                    b.Property<int>("StatusPorudzbine")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("VrijemeDostave")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("VrijemePOrudzbine")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArtikalId");
-
-                    b.HasIndex("IDKupca");
-
-                    b.HasIndex("ProdavacKorisnickoIme");
-
-                    b.ToTable("Porudzbina");
-                });
-
-            modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Prodavac", b =>
-                {
-                    b.Property<string>("KorisnickoIme")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AdministratorKorisnickoIme")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Adresa")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("DatumRodjenja")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("ImePrezime")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Lozinka")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Slika")
+                    b.Property<string>("StatusPorudzbine")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StatusPoruzbine")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("VrijemeIsporuke")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("Verifikovan")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("VrijemePorudzbine")
+                        .HasColumnType("datetime2");
 
-                    b.HasKey("KorisnickoIme");
+                    b.HasKey("IdPorudzbine");
 
-                    b.HasIndex("AdministratorKorisnickoIme");
+                    b.HasIndex("IdKorisnika");
 
-                    b.HasIndex("KorisnickoIme")
-                        .IsUnique();
-
-                    b.ToTable("Prodavci");
+                    b.ToTable("Porudzbine");
                 });
 
             modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Artikal", b =>
                 {
-                    b.HasOne("Web_Projekat_PR111_2019.Models.Prodavac", "Prodavac")
+                    b.HasOne("Web_Projekat_PR111_2019.Models.Korisnik", "Korisnik")
                         .WithMany("Artikli")
-                        .HasForeignKey("IDProdavca")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("IdKorisnika")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Prodavac");
+                    b.Navigation("Korisnik");
                 });
 
             modelBuilder.Entity("Web_Projekat_PR111_2019.Models.ArtikalIPorudzbina", b =>
                 {
                     b.HasOne("Web_Projekat_PR111_2019.Models.Artikal", "Artikal")
-                        .WithMany("ArtikliIporudzbine")
-                        .HasForeignKey("ArtikalId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .WithMany("ArtikliIPorudzbine")
+                        .HasForeignKey("IDArtikla")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Web_Projekat_PR111_2019.Models.Porudzbina", "Porudzbina")
                         .WithMany("ArtikliIPorudzbine")
-                        .HasForeignKey("PorudzbinaId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("IDPorudzbine")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Artikal");
@@ -308,76 +230,32 @@ namespace Web_Projekat_PR111_2019.Migrations
                     b.Navigation("Porudzbina");
                 });
 
-            modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Kupac", b =>
-                {
-                    b.HasOne("Web_Projekat_PR111_2019.Models.Administrator", "Administrator")
-                        .WithMany("Kupci")
-                        .HasForeignKey("KorisnickoIme")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Administrator");
-                });
-
             modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Porudzbina", b =>
                 {
-                    b.HasOne("Web_Projekat_PR111_2019.Models.Artikal", "Artikal")
-                        .WithMany()
-                        .HasForeignKey("ArtikalId");
-
-                    b.HasOne("Web_Projekat_PR111_2019.Models.Kupac", "Kupac")
+                    b.HasOne("Web_Projekat_PR111_2019.Models.Korisnik", "Korisnik")
                         .WithMany("Porudzbine")
-                        .HasForeignKey("IDKupca")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("IdKorisnika")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Web_Projekat_PR111_2019.Models.Prodavac", null)
-                        .WithMany("Porudzbine")
-                        .HasForeignKey("ProdavacKorisnickoIme");
-
-                    b.Navigation("Artikal");
-
-                    b.Navigation("Kupac");
-                });
-
-            modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Prodavac", b =>
-                {
-                    b.HasOne("Web_Projekat_PR111_2019.Models.Administrator", "Administrator")
-                        .WithMany("Prodavci")
-                        .HasForeignKey("AdministratorKorisnickoIme")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Administrator");
-                });
-
-            modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Administrator", b =>
-                {
-                    b.Navigation("Kupci");
-
-                    b.Navigation("Prodavci");
+                    b.Navigation("Korisnik");
                 });
 
             modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Artikal", b =>
                 {
-                    b.Navigation("ArtikliIporudzbine");
+                    b.Navigation("ArtikliIPorudzbine");
                 });
 
-            modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Kupac", b =>
+            modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Korisnik", b =>
                 {
+                    b.Navigation("Artikli");
+
                     b.Navigation("Porudzbine");
                 });
 
             modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Porudzbina", b =>
                 {
                     b.Navigation("ArtikliIPorudzbine");
-                });
-
-            modelBuilder.Entity("Web_Projekat_PR111_2019.Models.Prodavac", b =>
-                {
-                    b.Navigation("Artikli");
-
-                    b.Navigation("Porudzbine");
                 });
 #pragma warning restore 612, 618
         }

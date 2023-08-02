@@ -2,11 +2,11 @@
 {
     public class DTOArtikal
     {
-        public int Id { get; set; }
-        public string ImeArtikla { get; set; }
-        public int CijenaArtikla { get; set; }
+        public int ArtikalId { get; set; }
+        public string Naziv { get; set; }
+        public int Cijena { get; set; }
         public int KolicinaArtikla { get; set; }
         public string Opis { get; set; }
-        public string Slika { get; set; }
+        public byte[]? Slika { get; set; }
     }
 }

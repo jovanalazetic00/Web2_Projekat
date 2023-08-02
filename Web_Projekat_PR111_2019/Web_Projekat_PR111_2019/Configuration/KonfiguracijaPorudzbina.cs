@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Security.Cryptography;
 using Web_Projekat_PR111_2019.Models;
 
@@ -7,17 +8,28 @@ namespace Web_Projekat_PR111_2019.Configurations
 {
     public class KonfiguracijaPorudzbina : IEntityTypeConfiguration<Porudzbina>
     {
-       
+
 
         public void Configure(EntityTypeBuilder<Porudzbina> builder)
         {
-            builder.HasKey(p => p.Id);
-            builder.Property(p => p.Id).ValueGeneratedOnAdd();
-            builder.Property(p => p.AdresaIsporuke).IsRequired().HasMaxLength(50);
+            builder.HasKey(p => p.IdPorudzbine);
+            builder.Property(p => p.IdPorudzbine).ValueGeneratedOnAdd();
+            builder.Property(p => p.KomentarPorudzbine);
+            builder.Property(p => p.AdresaIsporuke).HasMaxLength(40).IsRequired();
+            builder.Property(p => p.CijenaPorudzbine).IsRequired();
+            builder.Property(p => p.VrijemeIsporuke).IsRequired();
+            builder.Property(p => p.VrijemePorudzbine).IsRequired();
+
+            builder.Property(p => p.StatusPorudzbine).HasConversion(new EnumToStringConverter<StatusPorudzbine>());
 
             builder.HasOne(p => p.Korisnik)
-                .WithMany(p => p.Porudzbine)
+                .WithMany(k => k.Porudzbine)
                 .HasForeignKey(p => p.IdKorisnika)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(p => p.ArtikliIPorudzbine)
+                .WithOne(s => s.Porudzbina)
+                .HasForeignKey(s => s.IDPorudzbine)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

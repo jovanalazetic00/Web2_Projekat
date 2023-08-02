@@ -15,3 +15,19 @@ build_property.SupportLocalizedComponentNames =
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = C:\Users\User\Desktop\Web2_Projekat\Web_Projekat_PR111_2019\Web_Projekat_PR111_2019
 build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/User/.nuget/packages/microsoft.visualstudio.threading.analyzers/17.6.40/build/AdditionalFiles/vs-threading.LegacyThreadSwitchingMembers.txt]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/.nuget/packages/microsoft.visualstudio.threading.analyzers/17.6.40/build/AdditionalFiles/vs-threading.MainThreadAssertingMethods.txt]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/.nuget/packages/microsoft.visualstudio.threading.analyzers/17.6.40/build/AdditionalFiles/vs-threading.MainThreadSwitchingMethods.txt]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/.nuget/packages/microsoft.visualstudio.threading.analyzers/17.6.40/build/AdditionalFiles/vs-threading.MembersRequiringMainThread.txt]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 

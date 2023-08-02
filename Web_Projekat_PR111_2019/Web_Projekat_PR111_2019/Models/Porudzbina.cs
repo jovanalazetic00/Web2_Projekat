@@ -4,7 +4,7 @@ namespace Web_Projekat_PR111_2019.Models
 {
     public class Porudzbina
     {
-        public int Id { get; set; } 
+        public int IdPorudzbine { get; set; } 
         public List<ArtikalIPorudzbina> ArtikliIPorudzbine { get; set; }
         public string AdresaIsporuke { get; set; }
         public string KomentarPorudzbine { get; set; }
@@ -16,6 +16,11 @@ namespace Web_Projekat_PR111_2019.Models
        
         public Korisnik Korisnik { get; set; }
         public int IdKorisnika { get; set; }
-        public double DostavaCijena { get; } = 100;
+        public bool Obrisan { get; set; }
+
+        public Porudzbina()
+        {
+            ArtikliIPorudzbine = new List<ArtikalIPorudzbina>();
+        }
     }
 }

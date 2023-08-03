@@ -16,16 +16,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<DBContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionWithDBWebProjekat"));
-});
+
 
 var mapperConfig = new MapperConfiguration(cfg =>
 {
-    cfg.AddProfile<MappingProfile>(); 
+    cfg.AddProfile<MappingProfile>();
 });
 ;
+
+
+builder.Services.AddDbContext<DBContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionWithDBWebProjekat"),
+        sqlServerOptions => sqlServerOptions.EnableRetryOnFailure());
+});
 
 
 
@@ -39,24 +43,6 @@ builder.Services.AddScoped<IRegistracijaService, RegistracijaService>();
 
 
 
-//byte[] ConvertIFormFileToByteArray(IFormFile file, ResolutionContext context)
-//{
-//    using (var memoryStream = new MemoryStream())
-//    {
-//        file.CopyTo(memoryStream);
-//        return memoryStream.ToArray();
-//    }
-//}
-
-
-
-//IFormFile ConvertByteArrayToIFormFile(byte[] byteArray, ResolutionContext context)
-//{
-//    var memoryStream = new MemoryStream(byteArray);
-//    var formFile = new FormFile(memoryStream, 0, byteArray.Length, null, "file");
-
-//    return formFile;
-//}
 
 
 

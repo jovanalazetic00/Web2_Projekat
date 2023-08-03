@@ -107,6 +107,7 @@ C:\Users\User\Desktop\Web2_Projekat\Web_Projekat_PR111_2019\Web_Projekat_PR111_2
 C:\Users\User\Desktop\Web2_Projekat\Web_Projekat_PR111_2019\Web_Projekat_PR111_2019\bin\Debug\net6.0\Lambda2Js.Signed.dll
 C:\Users\User\Desktop\Web2_Projekat\Web_Projekat_PR111_2019\Web_Projekat_PR111_2019\bin\Debug\net6.0\MessagePack.dll
 C:\Users\User\Desktop\Web2_Projekat\Web_Projekat_PR111_2019\Web_Projekat_PR111_2019\bin\Debug\net6.0\MessagePack.Annotations.dll
+C:\Users\User\Desktop\Web2_Projekat\Web_Projekat_PR111_2019\Web_Projekat_PR111_2019\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\User\Desktop\Web2_Projekat\Web_Projekat_PR111_2019\Web_Projekat_PR111_2019\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\User\Desktop\Web2_Projekat\Web_Projekat_PR111_2019\Web_Projekat_PR111_2019\bin\Debug\net6.0\Microsoft.Azure.DocumentDB.Core.dll
 C:\Users\User\Desktop\Web2_Projekat\Web_Projekat_PR111_2019\Web_Projekat_PR111_2019\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll

@@ -35,5 +35,23 @@ namespace Web_Projekat_PR111_2019.Controllers
                 return BadRequest(new { errors = new List<string> { e.Message } });
             }
         }
+
+
+        [HttpPost("logovanje")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Logovanje([FromBody] DTOLogIn logDTO)
+        {
+            try
+            {
+                string token = await registracijaService.LogIn(logDTO);
+
+                return Ok(string.Format("{0}", token));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { errors = new List<string> { e.Message } });
+            }
+        }
+
     }
 }

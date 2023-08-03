@@ -9,7 +9,11 @@ using Web_Projekat_PR111_2019.Interfaces.IRepository;
 using Web_Projekat_PR111_2019.Interfaces.IServices;
 using Web_Projekat_PR111_2019.Models;
 using Microsoft.AspNetCore.Http;
-
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace Web_Projekat_PR111_2019.Services
 {
@@ -137,5 +141,47 @@ namespace Web_Projekat_PR111_2019.Services
         }
 
        
+
+        public async Task<string> LogIn(DTOLogIn logovanjeDTO)
+        {
+            Korisnik korisnik = dbContext.Korisnici.FirstOrDefault(k => k.Email == logovanjeDTO.Email);
+
+
+            if (korisnik == null)
+            {
+                throw new Exception(string.Format("Korisnik ne postoji! Pogrešan email ili lozinka."));
+                //return Unauthorized();
+            }
+
+
+            string hesiranaLozinka = HesirajLozinku(logovanjeDTO.Lozinka);
+            if (hesiranaLozinka != korisnik.Lozinka)
+            {
+                throw new Exception(string.Format("Neispravna lozinka"));
+            }
+
+            var claims = new List<Claim>
+            {
+                new Claim("IdKorisnika", korisnik.IdKorisnika.ToString()),
+                new Claim(ClaimTypes.Role, korisnik.TipKorisnika.ToString()),
+                new Claim("StatusVerifikacije", korisnik.StatusVerifrikacije.ToString()),
+            };
+
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwtConfig:Key"]));
+
+            var token = new JwtSecurityToken(
+            Configuration["jwtConfig:Issuer"],
+            Configuration["jwtConfig:Audience"],
+            claims,
+            expires: DateTime.UtcNow.AddDays(1),
+            signingCredentials: new SigningCredentials(
+             key, SecurityAlgorithms.HmacSha256Signature));
+            //return new JwtSecurityTokenHandler().WriteToken(token);
+
+            var tokenn = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return tokenn;
+        }
     }
 }

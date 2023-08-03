@@ -8,6 +8,10 @@ using Web_Projekat_PR111_2019.Models;
 using Web_Projekat_PR111_2019.Repository;
 using Web_Projekat_PR111_2019.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +35,7 @@ builder.Services.AddDbContext<DBContext>(options =>
         sqlServerOptions => sqlServerOptions.EnableRetryOnFailure());
 });
 
+builder.Services.AddHttpContextAccessor();
 
 
 
@@ -40,15 +45,27 @@ builder.Services.AddSingleton(mapperConfig.CreateMapper());
 builder.Services.AddScoped<IRegistracijaRepository, RegistracijaRepository>();
 builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
 
+
+
 builder.Services.AddScoped<IRegistracijaService, RegistracijaService>();
 builder.Services.AddScoped<IKorisnikService, KorisnikService>();
 
 
 
-
-
+// ...
 
 var app = builder.Build();
+
+// ...
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+
+
+
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -57,6 +74,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -75,6 +93,7 @@ public class MappingProfile : Profile
     {
         CreateMap<DTOFormaRegistracije, Korisnik>();
         CreateMap<Korisnik, DTOKorisnik>();
+       
 
         CreateMap<IFormFile, byte[]>().ConvertUsing((file, _, context) => ConvertIFormFileToByteArray(file, context));
         CreateMap<byte[], IFormFile>().ConvertUsing((byteArray, _, context) => ConvertByteArrayToIFormFile(byteArray, context));

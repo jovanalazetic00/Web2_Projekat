@@ -7,5 +7,6 @@ namespace Web_Projekat_PR111_2019.Interfaces.IRepository
         Task Registracija(Korisnik kor);
 
         Task PotvrdiRegistraciju(int id);
+
     }
 }

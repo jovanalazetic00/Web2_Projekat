@@ -38,8 +38,10 @@ builder.Services.AddDbContext<DBContext>(options =>
 // Registrujte AutoMapper konfiguraciju u servisnoj kolekciji
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 builder.Services.AddScoped<IRegistracijaRepository, RegistracijaRepository>();
+builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
 
 builder.Services.AddScoped<IRegistracijaService, RegistracijaService>();
+builder.Services.AddScoped<IKorisnikService, KorisnikService>();
 
 
 

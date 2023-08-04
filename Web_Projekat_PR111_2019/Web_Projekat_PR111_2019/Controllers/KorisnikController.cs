@@ -56,5 +56,36 @@ namespace Web_Projekat_PR111_2019.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+
+        [HttpPost("potvrdaRegistracije/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> PotvrdaRegistracije(int id)
+        {
+            try
+            {
+                await korisnikService.PotvrdiRegistraciju(id);
+                return Ok(string.Format("Uspjesno izvrsena potvrda registracije  korisnika sa id-jem {0}", id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("odbijRegistraciju/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> OdbijRegistraciju(int id)
+        {
+            try
+            {
+                await korisnikService.OdbijRegistraciju(id);
+                return Ok(string.Format("Odbijena registracija korisnika sa id {0}. Korisnik je obrisan iz baze!", id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

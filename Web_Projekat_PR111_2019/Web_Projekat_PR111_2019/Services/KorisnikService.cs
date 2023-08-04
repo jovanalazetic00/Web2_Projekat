@@ -138,5 +138,15 @@ namespace Web_Projekat_PR111_2019.Services
         {
             await korisnikRepository.PotvrdiRegistraciju(id);
         }
+
+        public async Task OdbijRegistraciju(int id)
+        {
+            var korisnik = await korisnikRepository.DobaviKorisnikaPoID(id);
+            if (korisnik != null && korisnik.Verifikovan == false)
+            {
+                await korisnikRepository.ObrisiKorisnika(id);
+
+            }
+        }
     }
 }

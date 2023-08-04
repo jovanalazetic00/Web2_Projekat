@@ -44,11 +44,13 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 builder.Services.AddScoped<IRegistracijaRepository, RegistracijaRepository>();
 builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
+builder.Services.AddScoped<IArtikalRepository, ArtikalRepository>();
 
 
 
 builder.Services.AddScoped<IRegistracijaService, RegistracijaService>();
 builder.Services.AddScoped<IKorisnikService, KorisnikService>();
+builder.Services.AddScoped<IArtikalService, ArtikalService>();
 
 
 
@@ -93,7 +95,9 @@ public class MappingProfile : Profile
     {
         CreateMap<DTOFormaRegistracije, Korisnik>();
         CreateMap<Korisnik, DTOKorisnik>();
-       
+        CreateMap<Artikal, DTOArtikal>();
+        CreateMap<DTODodajArtikal, Artikal>();
+
 
         CreateMap<IFormFile, byte[]>().ConvertUsing((file, _, context) => ConvertIFormFileToByteArray(file, context));
         CreateMap<byte[], IFormFile>().ConvertUsing((byteArray, _, context) => ConvertByteArrayToIFormFile(byteArray, context));

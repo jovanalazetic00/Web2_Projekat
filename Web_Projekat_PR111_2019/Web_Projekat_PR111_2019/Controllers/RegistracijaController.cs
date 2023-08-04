@@ -53,5 +53,20 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
+        [HttpPost("potvrdaRegistracije/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> PotvrdiRegistraciju(int id)
+        {
+            try
+            {
+                await registracijaService.PotvrdiRegistraciju(id);
+
+                return Ok("Registracija je uspješno potvrđena.");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

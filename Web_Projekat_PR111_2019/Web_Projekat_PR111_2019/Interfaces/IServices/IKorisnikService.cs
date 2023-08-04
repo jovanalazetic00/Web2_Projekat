@@ -10,6 +10,7 @@ namespace Web_Projekat_PR111_2019.Interfaces.IServices
         Task<DTOKorisnik> AzurirajKorisnika(int id, DTOAzuriranjeKorisnika korisnikDto);
         Task<DTOKorisnik> ObrisiKorisnika(int id);
         Task PotvrdiRegistraciju(int id);
+        Task OdbijRegistraciju(int id);
 
     }
 }

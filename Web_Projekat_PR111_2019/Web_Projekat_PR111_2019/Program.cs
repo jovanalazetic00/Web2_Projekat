@@ -12,22 +12,56 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Dodajte servise u kontejner.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "PR522019_WEB2", Version = "v1" });
 
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT"
+    });
 
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
 
 var mapperConfig = new MapperConfiguration(cfg =>
 {
     cfg.AddProfile<MappingProfile>();
 });
-;
 
+builder.Services.AddSingleton(mapperConfig.CreateMapper());
+builder.Services.AddScoped<IRegistracijaRepository, RegistracijaRepository>();
+builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
+builder.Services.AddScoped<IArtikalRepository, ArtikalRepository>();
+
+builder.Services.AddScoped<IRegistracijaService, RegistracijaService>();
+builder.Services.AddScoped<IKorisnikService, KorisnikService>();
+builder.Services.AddScoped<IArtikalService, ArtikalService>();
 
 builder.Services.AddDbContext<DBContext>(options =>
 {
@@ -37,39 +71,29 @@ builder.Services.AddDbContext<DBContext>(options =>
 
 builder.Services.AddHttpContextAccessor();
 
-
-
-
-// Registrujte AutoMapper konfiguraciju u servisnoj kolekciji
-builder.Services.AddSingleton(mapperConfig.CreateMapper());
-builder.Services.AddScoped<IRegistracijaRepository, RegistracijaRepository>();
-builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
-builder.Services.AddScoped<IArtikalRepository, ArtikalRepository>();
-
-
-
-builder.Services.AddScoped<IRegistracijaService, RegistracijaService>();
-builder.Services.AddScoped<IKorisnikService, KorisnikService>();
-builder.Services.AddScoped<IArtikalService, ArtikalService>();
-
-
-
-// ...
+// Dodajte konfiguraciju za autentifikaciju
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        var jwtConfig = builder.Configuration.GetSection("jwtConfig");
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtConfig["Issuer"],
+            ValidAudience = jwtConfig["Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig["Key"])),
+            ClockSkew = TimeSpan.Zero
+        };
+    });
 
 var app = builder.Build();
 
 // ...
 
-app.UseAuthentication();
-app.UseAuthorization();
-
-
-
-
-
-
-
-// Configure the HTTP request pipeline.
+// Konfigurišite HTTP zahtevni tok.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -83,10 +107,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-
-
 app.Run();
-
 
 public class MappingProfile : Profile
 {

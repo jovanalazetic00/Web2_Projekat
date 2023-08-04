@@ -54,7 +54,7 @@ namespace Web_Projekat_PR111_2019.Controllers
         }
 
         [HttpPost("potvrdaRegistracije/{id}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> PotvrdiRegistraciju(int id)
         {
             try

@@ -105,15 +105,9 @@ namespace Web_Projekat_PR111_2019.Services
 
         public static bool ProvjeraLozinke(string lozinka, string potvrdjenaLozinka)
         {
-            if (lozinka == potvrdjenaLozinka)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return string.Equals(lozinka, potvrdjenaLozinka);
         }
+
 
         public static bool ProvjeraMail(string email)
         {

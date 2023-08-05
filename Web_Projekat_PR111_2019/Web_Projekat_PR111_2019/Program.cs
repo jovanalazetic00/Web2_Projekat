@@ -58,10 +58,12 @@ builder.Services.AddSingleton(mapperConfig.CreateMapper());
 builder.Services.AddScoped<IRegistracijaRepository, RegistracijaRepository>();
 builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
 builder.Services.AddScoped<IArtikalRepository, ArtikalRepository>();
+builder.Services.AddScoped<IPorudzbinaRepository, PorudzbinaRepository>();
 
 builder.Services.AddScoped<IRegistracijaService, RegistracijaService>();
 builder.Services.AddScoped<IKorisnikService, KorisnikService>();
 builder.Services.AddScoped<IArtikalService, ArtikalService>();
+builder.Services.AddScoped<IPorudzbinaService, PorudzbinaService>();
 
 builder.Services.AddDbContext<DBContext>(options =>
 {
@@ -118,6 +120,12 @@ public class MappingProfile : Profile
         CreateMap<Korisnik, DTOKorisnik>();
         CreateMap<Artikal, DTOArtikal>();
         CreateMap<DTODodajArtikal, Artikal>();
+        CreateMap<Porudzbina, DTOPorudzbina>();
+        CreateMap<DTODodajPorudzbinu, Porudzbina>();
+        CreateMap<DTOArtikliIPorudzbine, ArtikalIPorudzbina>().ReverseMap();
+    
+        CreateMap<DTODodajArtikalIPorudzbina, ArtikalIPorudzbina>();
+        CreateMap<Porudzbina, DTOPorudzbina>().ReverseMap();
 
 
         CreateMap<IFormFile, byte[]>().ConvertUsing((file, _, context) => ConvertIFormFileToByteArray(file, context));

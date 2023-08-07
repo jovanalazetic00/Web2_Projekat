@@ -54,16 +54,21 @@ var mapperConfig = new MapperConfiguration(cfg =>
     cfg.AddProfile<MappingProfile>();
 });
 
+builder.Services.AddScoped<Email>();
+
+
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 builder.Services.AddScoped<IRegistracijaRepository, RegistracijaRepository>();
 builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
 builder.Services.AddScoped<IArtikalRepository, ArtikalRepository>();
 builder.Services.AddScoped<IPorudzbinaRepository, PorudzbinaRepository>();
 
+
 builder.Services.AddScoped<IRegistracijaService, RegistracijaService>();
 builder.Services.AddScoped<IKorisnikService, KorisnikService>();
 builder.Services.AddScoped<IArtikalService, ArtikalService>();
 builder.Services.AddScoped<IPorudzbinaService, PorudzbinaService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddDbContext<DBContext>(options =>
 {

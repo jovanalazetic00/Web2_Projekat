@@ -24,13 +24,15 @@ namespace Web_Projekat_PR111_2019.Services
         private readonly IRegistracijaRepository registracijaRepository;
         private readonly DBContext dbContext;
         private readonly IConfiguration Configuration;
+        private readonly IKorisnikRepository korisnikRepository;
 
-        public RegistracijaService(IMapper maper, IRegistracijaRepository registracijaRepozitorijum, DBContext dbContext, IConfiguration configuration)
+        public RegistracijaService(IMapper maper, IRegistracijaRepository registracijaRepository, DBContext dbContext, IConfiguration configuration, IKorisnikRepository korisnikRepository)
         {
             this.maper = maper;
-            this.registracijaRepository = registracijaRepozitorijum;
+            this.registracijaRepository = registracijaRepository;
             this.dbContext = dbContext;
             Configuration = configuration;
+            this.korisnikRepository = korisnikRepository;
         }
 
         public async Task PotvrdiRegistraciju(int id)
@@ -176,6 +178,17 @@ namespace Web_Projekat_PR111_2019.Services
             var tokenn = new JwtSecurityTokenHandler().WriteToken(token);
 
             return tokenn;
+        }
+
+        public async Task<bool> ProvjeraEmaila(string email)
+        {
+            var korisnik = await dbContext.Korisnici.FirstOrDefaultAsync(k => k.Email == email);
+
+            if (korisnik == null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -12,10 +12,13 @@ namespace Web_Projekat_PR111_2019.Controllers
     public class KorisnikController: ControllerBase
     {
         private readonly IKorisnikService korisnikService;
+        private readonly IEmailService emailService;
 
-        public KorisnikController(IKorisnikService korisnikService)
+       
+        public KorisnikController(IKorisnikService korisnikService, IEmailService emailService)
         {
             this.korisnikService = korisnikService;
+            this.emailService = emailService;
         }
 
         [HttpDelete("{id}")]
@@ -239,6 +242,20 @@ namespace Web_Projekat_PR111_2019.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Posalji(string poruka, string verifikacija)
+        {
+            try
+            {
+                emailService.SlanjePoruke(poruka, verifikacija);
+                return Ok(string.Format("Uspjesno poslata poruka"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

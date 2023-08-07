@@ -68,5 +68,21 @@ namespace Web_Projekat_PR111_2019.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("provjeraMaila/{email}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<bool>> ProvjeraEmaila(string email)
+        {
+            var rezultat = await registracijaService.ProvjeraEmaila(email);
+
+            if (rezultat)
+            {
+                return Ok(true);
+            }
+            else
+            {
+                return NotFound(false);
+            }
+        }
     }
 }

@@ -12,11 +12,13 @@ namespace Web_Projekat_PR111_2019.Services
     {
         private readonly IKorisnikRepository korisnikRepository;
         private readonly IMapper maper;
+        private readonly IEmailService emailService;
 
-        public KorisnikService(IKorisnikRepository korisnikRepository, IMapper maper)
+        public KorisnikService(IKorisnikRepository korisnikRepository, IMapper maper, IEmailService emailService)
         {
             this.korisnikRepository = korisnikRepository;
             this.maper = maper;
+            this.emailService = emailService;
         }
 
         public async Task<DTOKorisnik> AzurirajKorisnika(int id, DTOAzuriranjeKorisnika korisnikDto)

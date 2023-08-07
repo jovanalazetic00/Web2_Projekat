@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Web_Projekat_PR111_2019.props" />
-</Project>

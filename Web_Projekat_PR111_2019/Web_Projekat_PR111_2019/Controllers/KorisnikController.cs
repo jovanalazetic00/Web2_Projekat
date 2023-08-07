@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Web_Projekat_PR111_2019.DTO;
 using Web_Projekat_PR111_2019.Interfaces.IServices;
+using Web_Projekat_PR111_2019.Models;
 using Web_Projekat_PR111_2019.Services;
 
 namespace Web_Projekat_PR111_2019.Controllers
@@ -85,6 +86,159 @@ namespace Web_Projekat_PR111_2019.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<ActionResult<DTOKorisnik>> AzurirajKorisnika(int id, [FromForm] DTOAzuriranjeKorisnika korisnikDTO)
+        {
+            try
+            {
+                var azuriraniKorisnik = await korisnikService.AzurirajKorisnika(id, korisnikDTO);
+                if (azuriraniKorisnik == null)
+                {
+                    return BadRequest("Korisnik ne postoji");
+                }
+                return Ok(azuriraniKorisnik);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest($"Greska: {ex.InnerException?.Message}");
+
+            }
+        }
+
+        [HttpGet("{id}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<Korisnik>> DobaviKorisnika(int id)
+        {
+            try
+            {
+                var korisnik = await korisnikService.DobaviKorisnikapoID(id);
+
+                if (korisnik == null)
+                {
+                    return BadRequest("Korisnik ne postoji");
+                }
+                return Ok(korisnik);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost("verifikacijaProdavca/{id}")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> VerifikacijaProdavca(int id)
+        {
+            try
+            {
+                await korisnikService.VerifikacijaProdavca(id);
+                return Ok(string.Format("Uspjesno izvrsena verfikacija prodavca"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult<List<DTOKorisnik>>> DobaviKorisnike()
+        {
+            try
+            {
+                var korisnici = await korisnikService.DobaviKorisnike();
+                return Ok(korisnici);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost("verifikacijaOdbijena/{id}")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> OdbijVerifikaciju(int id)
+        {
+            try
+            {
+                await korisnikService.OdbijVerifikaciju(id);
+                return Ok(string.Format("Uspjesno odbijena verifikacija"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("dobaviNeverifikovane")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult<List<DTOKorisnik>>> DobaviNeverifikovaneKorisnike()
+        {
+            try
+            {
+                var korisnici = await korisnikService.DobaviKorisnikeKojiCekajuNaVerifikaciju();
+                return Ok(korisnici);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("dobaviProdavce")]
+        [Authorize(Roles = "ADMINISTRATOR")]
+        public async Task<ActionResult<List<Korisnik>>> DobaviProdavce()
+        {
+            try
+            {
+                var korisnici = await korisnikService.DobaviSveProdavce();
+                return Ok(korisnici);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("dobaviVerifikovaneProdavce")]
+        [Authorize(Roles = "ADMINISTRATOR")]
+        public async Task<ActionResult<List<Korisnik>>> DobaviVerifikovaneProdavce()
+        {
+            try
+            {
+                var korisnici = await korisnikService.DobaviSveVerifikovaneProdavce();
+                return Ok(korisnici);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("{id}/profil")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Profil(int id)
+        {
+            try
+            {
+                var korisnik = await korisnikService.DobaviKorisnikapoID(id);
+
+                if (korisnik == null)
+                {
+                    throw new Exception("Korisnik ne postoji u bazi");
+                }
+
+                return Ok(korisnik);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
             }
         }
     }

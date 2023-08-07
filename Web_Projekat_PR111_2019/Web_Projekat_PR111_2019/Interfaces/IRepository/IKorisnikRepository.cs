@@ -10,5 +10,9 @@ namespace Web_Projekat_PR111_2019.Interfaces.IRepository
         Task<Korisnik> AzurirajKorisnika(Korisnik korisnik);
         Task<Korisnik> ObrisiKorisnika(int id);
         Task PotvrdiRegistraciju(int id);
+        Task VerifikacijaProdavca(int id);
+        Task OdbijVerifikaciju(int id);
+        Task<List<Korisnik>> DobaviSveProdavce();
+        Task<List<Korisnik>> DobaviKorisnikeKojiCekajuNaVerifikaciju();
     }
 }

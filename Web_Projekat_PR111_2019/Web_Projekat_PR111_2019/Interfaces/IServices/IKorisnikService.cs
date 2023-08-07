@@ -11,6 +11,11 @@ namespace Web_Projekat_PR111_2019.Interfaces.IServices
         Task<DTOKorisnik> ObrisiKorisnika(int id);
         Task PotvrdiRegistraciju(int id);
         Task OdbijRegistraciju(int id);
+        Task VerifikacijaProdavca(int id);
+        Task OdbijVerifikaciju(int id);
+        Task<List<Korisnik>> DobaviSveProdavce();
+        Task<List<Korisnik>> DobaviSveVerifikovaneProdavce();
+        Task<List<Korisnik>> DobaviKorisnikeKojiCekajuNaVerifikaciju();
 
     }
 }

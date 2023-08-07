@@ -22,7 +22,7 @@ namespace Web_Projekat_PR111_2019.Services
         public async Task<DTOKorisnik> AzurirajKorisnika(int id, DTOAzuriranjeKorisnika korisnikDto)
         {
             var korisnik = await korisnikRepository.DobaviKorisnikaPoID(id);
-            //maper.Map<AzuriranjeKorisnikaDTO>(korisnik);
+            
 
             if (korisnik != null)
             {
@@ -104,7 +104,7 @@ namespace Web_Projekat_PR111_2019.Services
                 throw new Exception("Korisnik  ne postoji u bazi");
             }
 
-            //return maper.Map<KorisnikDTO>(korisnik);
+            
             return korisnik;
         }
 
@@ -147,6 +147,58 @@ namespace Web_Projekat_PR111_2019.Services
                 await korisnikRepository.ObrisiKorisnika(id);
 
             }
+        }
+
+        public async Task VerifikacijaProdavca(int id)
+        {
+            var korisnik = await korisnikRepository.DobaviKorisnikaPoID(id);
+
+
+            if (korisnik == null)
+            {
+                throw new Exception(string.Format($"Korisnik  ne postoji u bazi"));
+            }
+
+            await korisnikRepository.VerifikacijaProdavca(id);
+        }
+
+        public async Task OdbijVerifikaciju(int id)
+        {
+            var korisnik = await korisnikRepository.DobaviKorisnikaPoID(id);
+
+            if (korisnik == null)
+            {
+                throw new Exception(string.Format($"Korisnik ne postoji u bazi"));
+            }
+
+            await korisnikRepository.OdbijVerifikaciju(id);
+        }
+
+        public async Task<List<Korisnik>> DobaviSveProdavce()
+        {
+            return await korisnikRepository.DobaviSveProdavce();
+        }
+
+        public async Task<List<Korisnik>> DobaviSveVerifikovaneProdavce()
+        {
+            var prodavci = await DobaviSveProdavce();
+
+            List<Korisnik> verifikovani = new List<Korisnik>();
+
+            foreach (var prodavac in prodavci)
+            {
+                if (prodavac.StatusVerifrikacije == StatusVerifikacije.Verifikovan && prodavac.Verifikovan == true)
+                {
+                    verifikovani.Add(prodavac);
+                }
+            }
+
+            return verifikovani;
+        }
+
+        public async Task<List<Korisnik>> DobaviKorisnikeKojiCekajuNaVerifikaciju()
+        {
+            return await korisnikRepository.DobaviKorisnikeKojiCekajuNaVerifikaciju();
         }
     }
 }

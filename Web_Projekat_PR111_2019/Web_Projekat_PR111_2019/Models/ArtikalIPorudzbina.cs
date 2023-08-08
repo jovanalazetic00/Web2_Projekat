@@ -4,8 +4,8 @@
     {
         public Porudzbina Porudzbina { get; set; }
         public Artikal Artikal { get; set; }
-        public int IDPorudzbine { get; set; }
-        public int IDArtikla { get; set; }
+        public int IDPorudzbineAIP { get; set; }
+        public int IDArtiklaAIP { get; set; }
         public int KolicinaArtikla { get; set; }
        
     }

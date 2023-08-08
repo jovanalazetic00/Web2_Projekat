@@ -17,8 +17,8 @@ namespace Web_Projekat_PR111_2019.Controllers
             this.artikalService = artikalService;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
+        [HttpGet("dobaviArtikle")]
+        [Authorize(Roles = "Kupac")]
         public async Task<ActionResult<List<DTOArtikal>>> DobaviArtikle()
         {
             try
@@ -32,13 +32,13 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        [AllowAnonymous]
-        public async Task<ActionResult<DTOArtikal>> DobavitArtikal(int id)
+        [HttpGet("dobaviArtikal/{id}")]
+        [Authorize(Roles = "Prodavac")]
+        public async Task<ActionResult<DTOArtikal>> DobaviArtikal(int id)
         {
             try
             {
-                var artikal = await artikalService.DobaviArtikalpoID(id);
+                var artikal = await artikalService.DobaviArtikalPoId(id);
 
                 if (artikal == null)
                 {
@@ -52,8 +52,8 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        [AllowAnonymous]
+        [HttpPut("azurirajArtikal/{id}")]
+        [Authorize(Roles = "Prodavac")]
         public async Task<ActionResult<DTOArtikal>> AzurirajArikal(int id, [FromForm] DTODodajArtikal artikalDTO)
         {
             try
@@ -72,8 +72,8 @@ namespace Web_Projekat_PR111_2019.Controllers
         }
 
 
-        [HttpDelete("{id}")]
-        [AllowAnonymous]
+        [HttpDelete("obrisiArtikal/{id}")]
+        [Authorize(Roles = "Prodavac")]
         public async Task<ActionResult<DTOArtikal>> ObrisiArtikal(int id)
         {
             try
@@ -92,7 +92,7 @@ namespace Web_Projekat_PR111_2019.Controllers
         }
 
         [HttpPost("dodajArtikal")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Prodavac")]
         public async Task<IActionResult> DodajArtikal([FromForm] DTODodajArtikal artikalDTO)
         {
             try
@@ -106,6 +106,37 @@ namespace Web_Projekat_PR111_2019.Controllers
                 return BadRequest(e.InnerException?.Message ?? e.Message);
             }
 
+        }
+
+
+        [HttpGet("artikalDostupan")]
+        [Authorize(Roles = "Prodavac")]
+        public async Task<ActionResult<bool>> ArtikalDostupan(DTOArtikal artikalDTO)
+        {
+            try
+            {
+                var dostupan = await artikalService.DostupanArtikal(artikalDTO);
+                return Ok(dostupan);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("dobaviArtikleProdavca/{id}")]
+        [Authorize(Roles = "Prodavac")]
+        public async Task<ActionResult<List<DTOArtikal>>> DobaviArtikleProdavca(int id)
+        {
+            try
+            {
+                var artikli = await artikalService.DobaviSveArtikleOdProdavca(id);
+                return Ok(artikli);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
     }

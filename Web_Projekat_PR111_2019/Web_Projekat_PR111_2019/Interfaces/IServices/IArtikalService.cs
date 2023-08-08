@@ -8,10 +8,13 @@ namespace Web_Projekat_PR111_2019.Interfaces.IServices
 
         Task<List<DTOArtikal>> DobaviSveArtikle();
 
-        Task<DTOArtikal> DobaviArtikalpoID(int id);
+        Task<DTOArtikal> DobaviArtikalPoId(int id);
 
         Task<DTOArtikal> AzurirajArtikal(int id, DTODodajArtikal artikalDTO);
 
         Task<DTOArtikal> ObrisiArtikal(int id);
+        Task<bool> DostupanArtikal(DTOArtikal artikalDTO);
+
+        Task<List<DTOArtikal>> DobaviSveArtikleOdProdavca(int idProdavca);
     }
 }

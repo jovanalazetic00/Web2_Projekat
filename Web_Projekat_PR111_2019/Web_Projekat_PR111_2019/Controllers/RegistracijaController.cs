@@ -53,7 +53,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpPost("potvrdaRegistracije/{id}")]
+        [HttpPost("potvrdiRegistraciju/{id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> PotvrdiRegistraciju(int id)
         {
@@ -69,7 +69,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("provjeraMaila/{email}")]
+        [HttpGet("provjeraEmaila/{email}")]
         [AllowAnonymous]
         public async Task<ActionResult<bool>> ProvjeraEmaila(string email)
         {

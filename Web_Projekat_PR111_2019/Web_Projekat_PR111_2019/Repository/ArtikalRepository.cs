@@ -14,6 +14,21 @@ namespace Web_Projekat_PR111_2019.Repository
             this.dbContext = dbContext;
         }
 
+        public async Task<bool> ArtikalDostupan(Artikal artikalDto)
+        {
+            var artikal = await dbContext.Artikli.FirstOrDefaultAsync(a => a.Naziv == artikalDto.Naziv);
+
+
+            if (artikal != null && artikal.KolicinaArtikla > 0)
+            {
+                return true;  //dostupan
+            }
+            else
+            {
+                return false; 
+            }
+        }
+
         public async Task<Artikal> AzurirajArtikal(Artikal artikal)
         {
             dbContext.Update(artikal);
@@ -30,6 +45,13 @@ namespace Web_Projekat_PR111_2019.Repository
                 return null;
             }
             return artikal;
+        }
+
+        public async Task<List<Artikal>> DobaviArtikleProdavca(int idProdavca)
+        {
+            return await dbContext.Artikli
+           .Where(art => art.IdKorisnika == idProdavca)
+           .ToListAsync();
         }
 
         public async Task<List<Artikal>> DobaviSveArtikle()

@@ -21,7 +21,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "PR522019_WEB2", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web_Projekat_PR111_2019", Version = "v1" });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -62,6 +62,7 @@ builder.Services.AddScoped<IRegistracijaRepository, RegistracijaRepository>();
 builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
 builder.Services.AddScoped<IArtikalRepository, ArtikalRepository>();
 builder.Services.AddScoped<IPorudzbinaRepository, PorudzbinaRepository>();
+builder.Services.AddScoped<IArtikalIPorudzbinaRepository, ArtikalIPorudzbinaRepository>();
 
 
 builder.Services.AddScoped<IRegistracijaService, RegistracijaService>();
@@ -131,6 +132,9 @@ public class MappingProfile : Profile
     
         CreateMap<DTODodajArtikalIPorudzbina, ArtikalIPorudzbina>();
         CreateMap<Porudzbina, DTOPorudzbina>().ReverseMap();
+ 
+        CreateMap<DTOAzuriranjeKorisnika, Korisnik>();
+        CreateMap<DTODodajArtikal, Artikal>();
 
 
         CreateMap<IFormFile, byte[]>().ConvertUsing((file, _, context) => ConvertIFormFileToByteArray(file, context));

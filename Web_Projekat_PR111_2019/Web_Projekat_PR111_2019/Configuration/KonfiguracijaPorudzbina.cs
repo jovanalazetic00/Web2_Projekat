@@ -29,7 +29,7 @@ namespace Web_Projekat_PR111_2019.Configurations
 
             builder.HasMany(p => p.ArtikliIPorudzbine)
                 .WithOne(s => s.Porudzbina)
-                .HasForeignKey(s => s.IDPorudzbine)
+                .HasForeignKey(s => s.IDPorudzbineAIP)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

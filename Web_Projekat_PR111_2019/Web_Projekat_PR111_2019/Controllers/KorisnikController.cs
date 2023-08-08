@@ -21,9 +21,9 @@ namespace Web_Projekat_PR111_2019.Controllers
             this.emailService = emailService;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("brisanjeKorisnika/{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<DTOKorisnik>> BrisanjeKorisnik(int id)
+        public async Task<ActionResult<DTOKorisnik>> BrisanjeKorisnika(int id)
         {
             try
             {
@@ -40,13 +40,13 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("{id}/dobaviKorisnikaPoId")]
+        [HttpGet("dobaviKorisnikaPoId/{id}")]
         [AllowAnonymous]
         public async Task<IActionResult> DobaviKorisnikaPoId(int id)
         {
             try
             {
-                var korisnik = await korisnikService.DobaviKorisnikapoID(id);
+                var korisnik = await korisnikService.DobaviKorisnikaPoId(id);
 
                 if (korisnik == null)
                 {
@@ -78,7 +78,7 @@ namespace Web_Projekat_PR111_2019.Controllers
         }
 
         [HttpPost("odbijRegistraciju/{id}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> OdbijRegistraciju(int id)
         {
             try
@@ -93,7 +93,7 @@ namespace Web_Projekat_PR111_2019.Controllers
         }
 
 
-        [HttpPut("{id}")]
+        [HttpPut("azurirajKorisnika/{id}")]
         [Authorize]
         public async Task<ActionResult<DTOKorisnik>> AzurirajKorisnika(int id, [FromForm] DTOAzuriranjeKorisnika korisnikDTO)
         {
@@ -114,13 +114,13 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("dobaviKorisnika/{id}")]
         [AllowAnonymous]
         public async Task<ActionResult<Korisnik>> DobaviKorisnika(int id)
         {
             try
             {
-                var korisnik = await korisnikService.DobaviKorisnikapoID(id);
+                var korisnik = await korisnikService.DobaviKorisnikaPoId(id);
 
                 if (korisnik == null)
                 {
@@ -149,7 +149,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("dobaviKorisnike")]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<List<DTOKorisnik>>> DobaviKorisnike()
         {
@@ -164,7 +164,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpPost("verifikacijaOdbijena/{id}")]
+        [HttpPost("odbijVerifikaciju/{id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> OdbijVerifikaciju(int id)
         {
@@ -179,7 +179,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("dobaviNeverifikovane")]
+        [HttpGet("dobaviNeverifikovaneKorisnike")]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<List<DTOKorisnik>>> DobaviNeverifikovaneKorisnike()
         {
@@ -195,7 +195,7 @@ namespace Web_Projekat_PR111_2019.Controllers
         }
 
         [HttpGet("dobaviProdavce")]
-        [Authorize(Roles = "ADMINISTRATOR")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<List<Korisnik>>> DobaviProdavce()
         {
             try
@@ -210,7 +210,7 @@ namespace Web_Projekat_PR111_2019.Controllers
         }
 
         [HttpGet("dobaviVerifikovaneProdavce")]
-        [Authorize(Roles = "ADMINISTRATOR")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<List<Korisnik>>> DobaviVerifikovaneProdavce()
         {
             try
@@ -224,13 +224,13 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("{id}/profil")]
+        [HttpGet("profil/{id}")]
         [AllowAnonymous]
         public async Task<IActionResult> Profil(int id)
         {
             try
             {
-                var korisnik = await korisnikService.DobaviKorisnikapoID(id);
+                var korisnik = await korisnikService.DobaviKorisnikaPoId(id);
 
                 if (korisnik == null)
                 {

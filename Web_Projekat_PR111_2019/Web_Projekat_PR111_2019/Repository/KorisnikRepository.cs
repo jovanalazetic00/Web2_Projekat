@@ -21,7 +21,7 @@ namespace Web_Projekat_PR111_2019.Repository
             return korisnik;
         }
 
-        public async Task<Korisnik> DobaviKorisnikaPoID(int id)
+        public async Task<Korisnik> DobaviKorisnikaPoId(int id)
         {
             var korisnik = await dbContext.Korisnici.FirstOrDefaultAsync(k => k.IdKorisnika == id);
 

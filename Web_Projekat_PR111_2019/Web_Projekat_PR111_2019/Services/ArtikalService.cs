@@ -22,6 +22,20 @@ namespace Web_Projekat_PR111_2019.Services
 
         public async Task<DTOArtikal> AzurirajArtikal(int id, DTODodajArtikal artikalDTO)
         {
+            var idCLaim = httpContextAccessor.HttpContext.User.FindFirst("IdKorisnika");
+
+
+            if (idCLaim == null)
+            {
+                throw new Exception("Korisnik ne postoji u klejmu");
+            }
+
+            int idd;
+
+            if (!int.TryParse(idCLaim.Value, out idd))
+            {
+                throw new Exception("Id nije konvertovan u broj");
+            }
             var artikal = await artikalRepository.DobaviArtikalPoId(id);
 
             maper.Map(artikalDTO, artikal);
@@ -59,13 +73,14 @@ namespace Web_Projekat_PR111_2019.Services
                 throw new Exception("Kolicina artikla mora biti veca od 0!");
             }
 
-            //int idd;
+            
             var art = await artikalRepository.AzurirajArtikal(artikal);
-           // art.IdKorisnika = idd;
+            art.IdKorisnika = idd;
             return maper.Map<DTOArtikal>(art);
         }
 
-        public async Task<DTOArtikal> DobaviArtikalpoID(int id)
+      
+        public async Task<DTOArtikal> DobaviArtikalPoId(int id)
         {
             var artikal = await artikalRepository.DobaviArtikalPoId(id);
 
@@ -76,6 +91,18 @@ namespace Web_Projekat_PR111_2019.Services
         {
             var artikli = await artikalRepository.DobaviSveArtikle();
             return maper.Map<List<DTOArtikal>>(artikli);
+        }
+
+        public async Task<List<DTOArtikal>> DobaviSveArtikleOdProdavca(int idProdavca)
+        {
+            var artikliProdavca = await artikalRepository.DobaviArtikleProdavca(idProdavca);
+
+            if (artikliProdavca == null)
+            {
+                throw new Exception("Prodavac nema artikle");
+            }
+
+            return maper.Map<List<DTOArtikal>>(artikliProdavca);
         }
 
         public async Task DodajArtikal(DTODodajArtikal artikalDTO)
@@ -118,6 +145,12 @@ namespace Web_Projekat_PR111_2019.Services
             artikal.IdKorisnika = id;
             await artikalRepository.DodajArtikal(artikal);
 
+        }
+
+        public async Task<bool> DostupanArtikal(DTOArtikal artikalDTO)
+        {
+            var artikal = maper.Map<Artikal>(artikalDTO);
+            return await artikalRepository.ArtikalDostupan(artikal);
         }
 
         public async Task<DTOArtikal> ObrisiArtikal(int id)

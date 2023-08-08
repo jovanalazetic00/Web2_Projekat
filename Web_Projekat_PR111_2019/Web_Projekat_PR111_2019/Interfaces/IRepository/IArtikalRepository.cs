@@ -10,5 +10,8 @@ namespace Web_Projekat_PR111_2019.Interfaces.IRepository
         Task<List<Artikal>> DobaviSveArtikle();
 
         Task<Artikal> DobaviArtikalPoId(int id);
+        Task<bool> ArtikalDostupan(Artikal artikalDto);
+
+        Task<List<Artikal>> DobaviArtikleProdavca(int idProdavca);
     }
 }

@@ -43,7 +43,7 @@ namespace Web_Projekat_PR111_2019.Services
 
             ;
             smtp.Connect("smtp-mail.outlook.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("projekatweb2@outlook.com", "rokovnik123");
+            smtp.Authenticate("projekatweb2@outlook.com", "jovana123");
             smtp.Send(mail);
             smtp.Disconnect(true);
 

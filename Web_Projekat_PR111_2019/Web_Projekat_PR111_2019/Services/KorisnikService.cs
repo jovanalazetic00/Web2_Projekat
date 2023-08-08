@@ -23,7 +23,7 @@ namespace Web_Projekat_PR111_2019.Services
 
         public async Task<DTOKorisnik> AzurirajKorisnika(int id, DTOAzuriranjeKorisnika korisnikDto)
         {
-            var korisnik = await korisnikRepository.DobaviKorisnikaPoID(id);
+            var korisnik = await korisnikRepository.DobaviKorisnikaPoId(id);
             
 
             if (korisnik != null)
@@ -97,19 +97,7 @@ namespace Web_Projekat_PR111_2019.Services
             }
         }
 
-        public async Task<Korisnik> DobaviKorisnikapoID(int id)
-        {
-            var korisnik = await korisnikRepository.DobaviKorisnikaPoID(id);
-
-            if (korisnik == null)
-            {
-                throw new Exception("Korisnik  ne postoji u bazi");
-            }
-
-            
-            return korisnik;
-        }
-
+       
         public async Task<List<DTOKorisnik>> DobaviKorisnike()
         {
             var korisnici = await korisnikRepository.DobaviKorisnike();
@@ -123,7 +111,7 @@ namespace Web_Projekat_PR111_2019.Services
 
         public async Task<DTOKorisnik> ObrisiKorisnika(int id)
         {
-            var korisnik = await korisnikRepository.DobaviKorisnikaPoID(id);
+            var korisnik = await korisnikRepository.DobaviKorisnikaPoId(id);
 
             if (korisnik == null)
             {
@@ -143,7 +131,7 @@ namespace Web_Projekat_PR111_2019.Services
 
         public async Task OdbijRegistraciju(int id)
         {
-            var korisnik = await korisnikRepository.DobaviKorisnikaPoID(id);
+            var korisnik = await korisnikRepository.DobaviKorisnikaPoId(id);
             if (korisnik != null && korisnik.Verifikovan == false)
             {
                 await korisnikRepository.ObrisiKorisnika(id);
@@ -153,7 +141,7 @@ namespace Web_Projekat_PR111_2019.Services
 
         public async Task VerifikacijaProdavca(int id)
         {
-            var korisnik = await korisnikRepository.DobaviKorisnikaPoID(id);
+            var korisnik = await korisnikRepository.DobaviKorisnikaPoId(id);
 
 
             if (korisnik == null)
@@ -166,7 +154,7 @@ namespace Web_Projekat_PR111_2019.Services
 
         public async Task OdbijVerifikaciju(int id)
         {
-            var korisnik = await korisnikRepository.DobaviKorisnikaPoID(id);
+            var korisnik = await korisnikRepository.DobaviKorisnikaPoId(id);
 
             if (korisnik == null)
             {
@@ -201,6 +189,19 @@ namespace Web_Projekat_PR111_2019.Services
         public async Task<List<Korisnik>> DobaviKorisnikeKojiCekajuNaVerifikaciju()
         {
             return await korisnikRepository.DobaviKorisnikeKojiCekajuNaVerifikaciju();
+        }
+
+        public async Task<Korisnik> DobaviKorisnikaPoId(int id)
+        {
+            var korisnik = await korisnikRepository.DobaviKorisnikaPoId(id);
+
+            if (korisnik == null)
+            {
+                throw new Exception("Korisnik  ne postoji u bazi");
+            }
+
+
+            return korisnik;
         }
     }
 }

@@ -19,8 +19,8 @@ namespace Web_Projekat_PR111_2019.Controllers
             this.porudzbinaService = porudzbinaService;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
+        [HttpGet("dobaviSvePorudzbine")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<List<Porudzbina>>> DobaviSvePorudzbine()
         {
             try
@@ -34,8 +34,8 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        [AllowAnonymous]
+        [HttpGet("dobaviPorudzbinu/{id}")]
+        [Authorize(Roles = "Kupac")]
         public async Task<ActionResult<Porudzbina>> DobaviPorudzbinu(int id)
         {
             try
@@ -54,8 +54,8 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        [AllowAnonymous]
+        [HttpPut("azurirajPorudzbinu/{id}")]
+        [Authorize(Roles = "Kupac")]
         public async Task<ActionResult<DTOPorudzbina>> AzurirajPorudzbinu(int id, DTOPorudzbina porudzbinaDTO)
         {
             try
@@ -74,8 +74,8 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        [AllowAnonymous]
+        [HttpDelete("obrisiPorudzbinu/{id}")]
+        [Authorize(Roles = "Kupac")]
         public async Task<ActionResult<DTOPorudzbina>> ObrisiPorudzbinu(int id)
         {
             try
@@ -96,7 +96,7 @@ namespace Web_Projekat_PR111_2019.Controllers
         }
 
         [HttpPost("dodajPorudzbinu")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Kupac")]
         public async Task<IActionResult> DodajPorudzbinu([FromBody] DTODodajPorudzbinu porudzbinaDTO)
         {
             try
@@ -110,6 +110,132 @@ namespace Web_Projekat_PR111_2019.Controllers
                 return BadRequest(e.InnerException?.Message ?? e.Message);
             }
 
+        }
+
+        [HttpGet("prethodnePorudzbine/{id}")]
+        [Authorize(Roles = "Kupac")]
+        public async Task<ActionResult<Porudzbina>> PrethodnePorudzbine(int id)
+        {
+            try
+            {
+                var prethodne = await porudzbinaService.DobaviPrethodnePorudzbineKupca(id);
+
+                if (prethodne == null)
+                {
+                    return BadRequest("Porudzbina ne postoji");
+                }
+                return Ok(prethodne);
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+
+        [HttpPut("otkaziPorudzbinu/{id}")]
+        [Authorize(Roles = "Kupac")]
+        public async Task<IActionResult> OtkaziPorudzbinu(int id)
+        {
+            try
+            {
+                await porudzbinaService.OtkaziPorudzbinu(id);
+
+                return Ok("otkazana");
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet("porudzbineKupca/{id}")]
+        [Authorize(Roles = "Kupac")]
+        public async Task<IActionResult> PorudzbineKupca(int id)
+        {
+            try
+            {
+                var porudzbine = await porudzbinaService.DobaviPrethodnePorudzbineKupca(id);
+
+                return Ok(porudzbine);
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet("novePorudzbineProdavca/{id}")]
+        [Authorize(Roles = "Prodavac")]
+        public async Task<IActionResult> NovePorudzbineProdavca(int id)
+        {
+            try
+            {
+                var porudzbine = await porudzbinaService.NovePorudzineProdavca(id);
+
+                return Ok(porudzbine);
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+
+
+        [HttpGet("mojePorudzbine/{id}")]
+        [Authorize(Roles = "Prodavac")]
+        public async Task<IActionResult> MojePorudzbine(int id)
+        {
+            try
+            {
+                var porudzbine = await porudzbinaService.MojePorudzbine(id);
+
+                return Ok(porudzbine);
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+
+        }
+
+
+        [HttpGet("dobaviArtiklePorudzbine/{id}")]
+        [Authorize(Roles = "Administrator, Kupac")]
+        public async Task<ActionResult<List<Artikal>>> DobaviArtiklePorudzbine(int id)
+        {
+            try
+            {
+                var artikli = await porudzbinaService.DobaviArtiklePorudzbine(id);
+                return Ok(artikli);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+
+        [HttpGet("dobaviArtiklePorudzbineProdavca/{id}")]
+        [Authorize(Roles = "Prodavac")]
+
+        public async Task<ActionResult<List<Artikal>>> DobaviArtiklePorudzbineProdavca(int id)
+        {
+            try
+            {
+                var artikli = await porudzbinaService.DobaviArtiklePorudzbineProdavca(id);
+                return Ok(artikli);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

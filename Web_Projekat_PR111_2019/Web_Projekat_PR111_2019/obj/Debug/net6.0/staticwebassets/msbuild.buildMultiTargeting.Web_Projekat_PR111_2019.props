@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Web_Projekat_PR111_2019.props" />
+</Project>

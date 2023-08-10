@@ -69,7 +69,7 @@ namespace Web_Projekat_PR111_2019.Services
             }
 
             registracijaKorisnika.Lozinka = HesirajLozinku(registracijaDTO.Lozinka);
-            registracijaKorisnika.PotvrdaLozinke = HesirajLozinku(registracijaDTO.PotvrdiLozinku);
+            registracijaKorisnika.PotvrdaLozinke = HesirajLozinku(registracijaDTO.PotvrdaLozinke);
             registracijaKorisnika.Obrisan = false;
             registracijaKorisnika.PotvrdaRegistracije = false;
 

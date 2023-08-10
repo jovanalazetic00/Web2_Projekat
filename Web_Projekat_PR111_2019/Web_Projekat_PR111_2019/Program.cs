@@ -71,6 +71,18 @@ builder.Services.AddScoped<IArtikalService, ArtikalService>();
 builder.Services.AddScoped<IPorudzbinaService, PorudzbinaService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyCorsPolicy",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "https://localhost:3000", "https://localhost:3001", "https://localhost:3002")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowCredentials();
+        });
+});
+
 builder.Services.AddDbContext<DBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionWithDBWebProjekat"),
@@ -108,10 +120,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseAuthentication();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseCors("MyCorsPolicy");
 
 app.MapControllers();
 

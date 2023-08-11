@@ -1,87 +1,96 @@
 import React, { useState } from 'react';
+import './Logovanje.css';
 import { Link, useNavigate } from 'react-router-dom';
-import './Logovanje.css'; 
+import { LogovanjeService, ProvjeriMail, setHeader } from '../services/LogovanjeService';
 
-const Logovanje = () => {
-  const [korisnickoIme, setKorisnickoIme] = useState('');
-  const [email, setEmail] = useState('');
-  const [lozinka, setLozinka] = useState('');
-  const [greske, setGreske] = useState([]);
-  const [uspjesno, setUspjesno] = useState(false);
 
-  const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  
+export const Logovanje = () => {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [lozinka, setLozinka] = useState('');
+    const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
 
-    if (!korisnickoIme || !email || !lozinka) {
-      setGreske(['Unesite sve podatke']);
-      setUspjesno(false);
-      return;
-    }
 
-    if (lozinka.length < 8) {
-      setGreske(['Lozinka mora imati barem 8 karaktera']);
-      setUspjesno(false);
-      return;
-    }
-
-    try {
-      // Simulacija prijave korisnika
-      setUspjesno(true);
-      setGreske([]);
-      navigate('/dashboard');
-    } catch (error) {
-      setGreske(['Niste ispravno popunili podatke']);
-    }
+    const provjeriEmail = async () => {
+      try {
+    
+        const emailPostoji = await ProvjeriMail(email);
+    
+      } catch (error) {
+        console.log(error);
+        setMessage('Mail ne postoji u bazi');
+      }
   };
 
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+
+        provjeriEmail();
+
+        const token = await LogovanjeService(email, lozinka);
+
+          if(token !== null)
+          {
+            localStorage.setItem('token', token);
+            setHeader(token);
+        
+            setEmail('');
+            setLozinka('');
+            navigate('/dashBoard');
+          }
+        }catch (error)
+        {
+          setMessage("Greska pri unosu podataka");
+        }
+    };
+
+
+ 
+
   return (
-    <div className="forma-container">
-      <h2>Prijava</h2>
+    <div className="form">
+      <h2>Logovanje</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Korisničko ime:</label>
-          <input
-            type="text"
-            value={korisnickoIme}
-            onChange={(e) => setKorisnickoIme(e.target.value)}
-          />
+        <div className="form">
+          <label htmlFor="email">E-mail: </label>
+          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Lozinka:</label>
+        <div className="form">
+          <label htmlFor="lozinka">Lozinka: </label>
           <input
             type="password"
+            id="lozinka"
             value={lozinka}
             onChange={(e) => setLozinka(e.target.value)}
+            required
           />
         </div>
-        {greske.length > 0 && (
-          <div className="error-container">
-            <ul>
-              {greske.map((greska, index) => (
-                <li key={index}>{greska}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {uspjesno && (
-          <div className="success-container">
-            <p>Prijava uspješna!</p>
-          </div>
-        )}
-        <button type="submit">Prijavi se</button>
+        <button className="btn">Loguj se</button>
+        <br/>
       </form>
-      <br />
-      <Link to="/registracija">Nemate nalog? Registruj se!</Link>
+      
+        {error && <p className="error">{error}</p>}
+        <br />
+        <label className="nazad" htmlFor="/home">
+          <Link to="/">Povratak na početnu stranicu</Link>
+        </label>
+
+        <p>  {message && (
+        <div>
+          <p style={{ color: 'red' }}> Greska: {message}</p>
+        </div>
+      )}</p>
+         <p>  {error && (
+        <div>
+          <p style={{ color: 'red' }}> Greska: {error}</p>
+        </div>
+      )}</p>
+        
     </div>
   );
 };

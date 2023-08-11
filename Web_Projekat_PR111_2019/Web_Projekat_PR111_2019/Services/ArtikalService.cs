@@ -43,7 +43,7 @@ namespace Web_Projekat_PR111_2019.Services
             if (artikal != null)
             {
                 artikal.Cijena = artikalDTO.Cijena;
-                artikal.KolicinaArtikla = artikalDTO.Kolicina;
+                artikal.KolicinaArtikla = artikalDTO.KolicinaArtikla;
                 artikal.Naziv = artikalDTO.Naziv;
                 artikal.Opis = artikalDTO.Opis;
                 using (var ms = new MemoryStream())
@@ -68,7 +68,7 @@ namespace Web_Projekat_PR111_2019.Services
             {
                 throw new Exception("Cijena artikla mora biti veca od 0!");
             }
-            if (artikalDTO.Kolicina < 0)
+            if (artikalDTO.KolicinaArtikla < 0)
             {
                 throw new Exception("Kolicina artikla mora biti veca od 0!");
             }
@@ -107,7 +107,7 @@ namespace Web_Projekat_PR111_2019.Services
 
         public async Task DodajArtikal(DTODodajArtikal artikalDTO)
         {
-            var idCLaim = httpContextAccessor.HttpContext.User.FindFirst("KorisnikID");
+            var idCLaim = httpContextAccessor.HttpContext.User.FindFirst("IdKorisnika");
 
 
             if (idCLaim == null)

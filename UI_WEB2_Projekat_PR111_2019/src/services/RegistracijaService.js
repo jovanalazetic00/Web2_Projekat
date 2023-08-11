@@ -1,4 +1,6 @@
-import axioss from "../configuration/axios";
+import { axioss } from '../configuration/axios';
+
+
 
 export const RegistracijaService = async (formData) => {
   const response = await axioss.post(`/Registracija/registracija`, formData, {

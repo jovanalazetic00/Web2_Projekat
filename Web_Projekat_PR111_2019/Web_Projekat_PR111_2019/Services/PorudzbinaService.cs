@@ -157,7 +157,7 @@ namespace Web_Projekat_PR111_2019.Services
                 throw new Exception("ID nije konvertovan u broj");
             }
 
-            if (string.IsNullOrEmpty(porudzbinaDTO.Adresa))
+            if (string.IsNullOrEmpty(porudzbinaDTO.AdresaIsporuke))
             {
                 throw new Exception("Polje adresa je obavezno!");
             }

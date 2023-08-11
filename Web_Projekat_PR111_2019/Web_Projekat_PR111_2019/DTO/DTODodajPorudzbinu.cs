@@ -2,8 +2,8 @@
 {
     public class DTODodajPorudzbinu
     {
-        public string Adresa { get; set; }
-        public string Komentar { get; set; }
+        public string AdresaIsporuke { get; set; }
+        public string KomentarPorudzbine { get; set; }
         public List<DTODodajArtikalIPorudzbina> Stavke { get; set; } = null;
     }
 }

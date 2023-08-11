@@ -16,7 +16,7 @@ namespace Web_Projekat_PR111_2019.Repository
 
         public async Task PotvrdiRegistraciju(int id)
         {
-            Korisnik korisnik = dbContext.Korisnici.FirstOrDefault(k => k.IdKorisnika == id);
+            Korisnik korisnik = await dbContext.Korisnici.SingleOrDefaultAsync(k => k.IdKorisnika == id);
 
 
             if (korisnik == null)

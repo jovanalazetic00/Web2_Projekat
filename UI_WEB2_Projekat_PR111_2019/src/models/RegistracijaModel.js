@@ -12,4 +12,5 @@ export class RegistracijaModel  {
      this.slika = slika;
     }
  }
-export default RegistracijaModel;
+
+ export default RegistracijaModel;

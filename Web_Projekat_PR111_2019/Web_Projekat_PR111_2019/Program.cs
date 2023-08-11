@@ -109,6 +109,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+        .RequireAuthenticatedUser()
+        .Build();
+
+    options.AddPolicy("SamoVerifikovani", policy => policy.RequireClaim("StatusVerifikacije", "Odobren"));
+
+});
+
 var app = builder.Build();
 
 // ...
@@ -120,15 +131,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-app.UseAuthentication();
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 app.UseCors("MyCorsPolicy");
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
-
 app.Run();
 
 public class MappingProfile : Profile

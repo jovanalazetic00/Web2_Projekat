@@ -4,7 +4,7 @@
     {
         public string Naziv { get; set; }
         public double Cijena { get; set; }
-        public int Kolicina { get; set; }
+        public int KolicinaArtikla { get; set; }
         public string Opis { get; set; }
         public IFormFile? Slika { get; set; }
     }

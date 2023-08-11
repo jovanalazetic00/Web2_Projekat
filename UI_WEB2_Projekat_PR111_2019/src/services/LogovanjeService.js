@@ -3,7 +3,7 @@ import { axioss } from '../configuration/axios';
 const LOGIN_URL = '/Registracija/logovanje';
 
 
-export const LogovanjeServis = async (email,lozinka) => {
+export const LogovanjeService = async (email,lozinka) => {
 
   try {
     const  data  = await axios.post(
@@ -42,8 +42,9 @@ export const setHeader = (token) =>
 
 
 
+
 export const ProvjeriMail = async(email) => {
  
-   const resp =  await axioss.get(`/Autentifikacija/provjeraMaila/${email}`);
+   const resp =  await axioss.get(`/Registracija/provjeraEmaila/${email}`);
    return resp.data;
 };

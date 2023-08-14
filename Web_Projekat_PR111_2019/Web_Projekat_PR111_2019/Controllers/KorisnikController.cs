@@ -21,7 +21,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             this.emailService = emailService;
         }
 
-        [HttpDelete("brisanjeKorisnika/{id}")]
+        [HttpDelete("{id}")]
         [AllowAnonymous]
         public async Task<ActionResult<DTOKorisnik>> BrisanjeKorisnika(int id)
         {
@@ -93,7 +93,7 @@ namespace Web_Projekat_PR111_2019.Controllers
         }
 
 
-        [HttpPut("azurirajKorisnika/{id}")]
+        [HttpPut("{id}")]
         [Authorize]
         public async Task<ActionResult<DTOKorisnik>> AzurirajKorisnika(int id, [FromForm] DTOAzuriranjeKorisnika korisnikDTO)
         {
@@ -114,7 +114,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("dobaviKorisnika/{id}")]
+        [HttpGet("{id}")]
         [AllowAnonymous]
         public async Task<ActionResult<Korisnik>> DobaviKorisnika(int id)
         {
@@ -149,7 +149,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("dobaviKorisnike")]
+        [HttpGet]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<List<DTOKorisnik>>> DobaviKorisnike()
         {
@@ -224,7 +224,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("profil/{id}")]
+        [HttpGet("{id}/profil")]
         [AllowAnonymous]
         public async Task<IActionResult> Profil(int id)
         {

@@ -39,10 +39,6 @@ export const setHeader = (token) =>
 };
 
 
-
-
-
-
 export const ProvjeriMail = async(email) => {
  
    const resp =  await axioss.get(`/Registracija/provjeraEmaila/${email}`);

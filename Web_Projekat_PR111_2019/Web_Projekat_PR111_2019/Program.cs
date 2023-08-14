@@ -116,7 +116,7 @@ builder.Services.AddAuthorization(options =>
         .RequireAuthenticatedUser()
         .Build();
 
-    options.AddPolicy("SamoVerifikovani", policy => policy.RequireClaim("StatusVerifikacije", "Odobren"));
+    options.AddPolicy("VerifikovanProdavac", policy => policy.RequireClaim("StatusVerifikacije", "Verifikovan"));
 
 });
 

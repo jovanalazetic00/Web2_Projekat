@@ -14,6 +14,8 @@ import ProdavacStranica from './components/ProdavacStranica';
 import PotvrdiRegistraciju from './components/PotvrdaRegistracije';
 import ProdavciVerifikacija from './components/ProdavciVerifikacija';
 import SviVerifikovaniProdavci  from './components/DobaviVerifikovaneProdavce';
+import Porudzbina from './components/Porudzbina';
+import PrethodnePorudzbine from './components/PrethodnePorudzbine';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path='/potvrdaRegistracije' element={<PotvrdiRegistraciju />}/>
           <Route path='/dobaviProdavce' element={<ProdavciVerifikacija />}/>
           <Route path='/prikaziSveVerifikovane' element={<SviVerifikovaniProdavci />}/>
+          <Route path='/porudzbina' element={<Porudzbina/>}/>
+          <Route path='/prethodnePorudzbine/:id' element={<PrethodnePorudzbine/>}/>
         </Routes>
       
     </Router>

@@ -46,11 +46,11 @@ const DashBoard = () => {
         <KupacStranica></KupacStranica>
       )}
 
-      {uloga === 'Prodavac' && korisnik && korisnik.statusVerifikacije === 1 && korisnik.verifikovan === true && (
+      {uloga === 'Prodavac' && korisnik && korisnik.statusVerifrikacije === 1 && korisnik.verifikovan === true && (
         <ProdavacStranica></ProdavacStranica>
       )}
 
-      {uloga === 'Prodavac' && korisnik.statusVerifikacije !== 1 && korisnik.verifikovan === false && (
+      {uloga === 'Prodavac' && korisnik.statusVerifrikacije !== 1 && korisnik.verifikovan === false && (
         navigate(`/profil/${id}`)
       )}
     </div>

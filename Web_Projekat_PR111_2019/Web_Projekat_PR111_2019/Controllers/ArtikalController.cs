@@ -17,7 +17,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             this.artikalService = artikalService;
         }
 
-        [HttpGet("dobaviArtikle")]
+        [HttpGet]
         [Authorize(Roles = "Kupac")]
         public async Task<ActionResult<List<DTOArtikal>>> DobaviArtikle()
         {
@@ -32,8 +32,8 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("dobaviArtikal/{id}")]
-        [Authorize(Roles = "Prodavac")]
+        [HttpGet("{id}")]
+        [Authorize(Roles = "Prodavac", Policy = "VerifikovanProdavac")]
         public async Task<ActionResult<DTOArtikal>> DobaviArtikal(int id)
         {
             try
@@ -52,8 +52,8 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpPut("azurirajArtikal/{id}")]
-        [Authorize(Roles = "Prodavac")]
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Prodavac", Policy = "VerifikovanProdavac")]
         public async Task<ActionResult<DTOArtikal>> AzurirajArikal(int id, [FromForm] DTODodajArtikal artikalDTO)
         {
             try
@@ -72,8 +72,8 @@ namespace Web_Projekat_PR111_2019.Controllers
         }
 
 
-        [HttpDelete("obrisiArtikal/{id}")]
-        [Authorize(Roles = "Prodavac")]
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Prodavac", Policy = "VerifikovanProdavac")]
         public async Task<ActionResult<DTOArtikal>> ObrisiArtikal(int id)
         {
             try
@@ -92,7 +92,7 @@ namespace Web_Projekat_PR111_2019.Controllers
         }
 
         [HttpPost("dodajArtikal")]
-        [Authorize(Roles = "Prodavac")]
+        [Authorize(Roles = "Prodavac", Policy = "VerifikovanProdavac")]
         public async Task<IActionResult> DodajArtikal([FromForm] DTODodajArtikal artikalDTO)
         {
             try
@@ -110,7 +110,7 @@ namespace Web_Projekat_PR111_2019.Controllers
 
 
         [HttpGet("artikalDostupan")]
-        [Authorize(Roles = "Prodavac")]
+        [Authorize(Roles = "Prodavac", Policy = "VerifikovanProdavac")]
         public async Task<ActionResult<bool>> ArtikalDostupan(DTOArtikal artikalDTO)
         {
             try
@@ -125,7 +125,7 @@ namespace Web_Projekat_PR111_2019.Controllers
         }
 
         [HttpGet("dobaviArtikleProdavca/{id}")]
-        [Authorize(Roles = "Prodavac")]
+        [Authorize(Roles = "Prodavac", Policy = "VerifikovanProdavac")]
         public async Task<ActionResult<List<DTOArtikal>>> DobaviArtikleProdavca(int id)
         {
             try

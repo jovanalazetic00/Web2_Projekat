@@ -73,7 +73,7 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("MyCorsPolicy",
+    options.AddPolicy("ReactAppPolicy",
         builder =>
         {
             builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "https://localhost:3000", "https://localhost:3001", "https://localhost:3002")
@@ -132,7 +132,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("MyCorsPolicy");
+app.UseCors("ReactAppPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

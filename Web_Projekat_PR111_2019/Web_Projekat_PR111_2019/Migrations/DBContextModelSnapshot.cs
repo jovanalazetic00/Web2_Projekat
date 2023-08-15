@@ -63,18 +63,18 @@ namespace Web_Projekat_PR111_2019.Migrations
 
             modelBuilder.Entity("Web_Projekat_PR111_2019.Models.ArtikalIPorudzbina", b =>
                 {
-                    b.Property<int>("IDPorudzbine")
+                    b.Property<int>("IDPorudzbineAIP")
                         .HasColumnType("int");
 
-                    b.Property<int>("IDArtikla")
+                    b.Property<int>("IDArtiklaAIP")
                         .HasColumnType("int");
 
                     b.Property<int>("KolicinaArtikla")
                         .HasColumnType("int");
 
-                    b.HasKey("IDPorudzbine", "IDArtikla");
+                    b.HasKey("IDPorudzbineAIP", "IDArtiklaAIP");
 
-                    b.HasIndex("IDArtikla");
+                    b.HasIndex("IDArtiklaAIP");
 
                     b.ToTable("ArtikliIPorudzbine");
                 });
@@ -215,13 +215,13 @@ namespace Web_Projekat_PR111_2019.Migrations
                 {
                     b.HasOne("Web_Projekat_PR111_2019.Models.Artikal", "Artikal")
                         .WithMany("ArtikliIPorudzbine")
-                        .HasForeignKey("IDArtikla")
+                        .HasForeignKey("IDArtiklaAIP")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Web_Projekat_PR111_2019.Models.Porudzbina", "Porudzbina")
                         .WithMany("ArtikliIPorudzbine")
-                        .HasForeignKey("IDPorudzbine")
+                        .HasForeignKey("IDPorudzbineAIP")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

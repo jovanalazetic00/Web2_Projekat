@@ -30,7 +30,7 @@ const Profil = () => {
   const dekodiranToken = jwtDecode(token);
   const idd = dekodiranToken['IdKorisnika'];
   const uloga = dekodiranToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-  const statusVerifikacije = dekodiranToken['StatusVerifikacije'];
+  const statusVerifrikacije = dekodiranToken['StatusVerifrikacije'];
 
   const provjeriEmail = async () => {
     try {
@@ -170,9 +170,9 @@ const azuriraj = async() => {
 
 useEffect(() => {
   if (uloga === 'Prodavac') {
-    setMessVerifikacija(statusVerifikacije);
+    setMessVerifikacija(statusVerifrikacije);
   }
-}, [uloga, statusVerifikacije]);
+}, [uloga, statusVerifrikacije]);
 
 return (
   <div>

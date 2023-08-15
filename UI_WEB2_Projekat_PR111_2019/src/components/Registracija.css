@@ -1,8 +1,14 @@
 /* Registracija.css */
 
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
 .form {
   max-width: 400px;
-  margin: 0 auto;
   padding: 20px;
   background-color: #f7f7f7;
   border: 1px solid #ccc;

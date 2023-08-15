@@ -83,7 +83,7 @@ return (
                 <td>{prod.verifikovan ? "True" : "False"}</td>
                 <td>
                 {(() => {
-                  switch (prod.statusVerifikacije) {
+                  switch (prod.statusVerifrikacije) {
                     case 0:
                       return "Uobradi";
                     case 1:
@@ -131,7 +131,7 @@ return (
         onChange={(e) => setIDD(e.target.value)}
       />
       <button className="btn" type="button" onClick={() => odbijVerifikaciju(idd)}>
-        Odbj 
+        Odbij 
       </button>
      
       <Link to="/dashBoard"> Dash Board</Link>

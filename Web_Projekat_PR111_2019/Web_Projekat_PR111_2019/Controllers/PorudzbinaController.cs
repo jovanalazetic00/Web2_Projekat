@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Web_Projekat_PR111_2019.DTO;
 using Web_Projekat_PR111_2019.Interfaces.IRepository;
@@ -10,6 +11,7 @@ namespace Web_Projekat_PR111_2019.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("ReactAppPolicy")]
     public class PorudzbinaController:ControllerBase
     {
         private readonly IPorudzbinaService porudzbinaService;
@@ -19,7 +21,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             this.porudzbinaService = porudzbinaService;
         }
 
-        [HttpGet("dobaviSvePorudzbine")]
+        [HttpGet]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<List<Porudzbina>>> DobaviSvePorudzbine()
         {
@@ -34,7 +36,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpGet("dobaviPorudzbinu/{id}")]
+        [HttpGet("{id}")]
         [Authorize(Roles = "Kupac")]
         public async Task<ActionResult<Porudzbina>> DobaviPorudzbinu(int id)
         {
@@ -54,7 +56,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpPut("azurirajPorudzbinu/{id}")]
+        [HttpPut("{id}")]
         [Authorize(Roles = "Kupac")]
         public async Task<ActionResult<DTOPorudzbina>> AzurirajPorudzbinu(int id, DTOPorudzbina porudzbinaDTO)
         {
@@ -74,7 +76,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        [HttpDelete("obrisiPorudzbinu/{id}")]
+        [HttpDelete("{id}")]
         [Authorize(Roles = "Kupac")]
         public async Task<ActionResult<DTOPorudzbina>> ObrisiPorudzbinu(int id)
         {
@@ -187,7 +189,7 @@ namespace Web_Projekat_PR111_2019.Controllers
 
 
 
-        [HttpGet("mojePorudzbine/{id}")]
+        [HttpGet("mojePorudzbineProdavac/{id}")]
         [Authorize(Roles = "Prodavac")]
         public async Task<IActionResult> MojePorudzbine(int id)
         {

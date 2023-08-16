@@ -71,6 +71,10 @@ builder.Services.AddScoped<IArtikalService, ArtikalService>();
 builder.Services.AddScoped<IPorudzbinaService, PorudzbinaService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
+var configuration = new ConfigurationBuilder()
+        .SetBasePath(builder.Environment.ContentRootPath)
+        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactAppPolicy",

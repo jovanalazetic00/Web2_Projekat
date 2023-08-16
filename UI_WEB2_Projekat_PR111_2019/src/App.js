@@ -1,7 +1,7 @@
 
 import './App.css';
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Pocetna from './components/Pocetna';
 import Logovanje from './components/Logovanje';
 import Registracija from './components/Registracija';
@@ -16,10 +16,13 @@ import ProdavciVerifikacija from './components/ProdavciVerifikacija';
 import SviVerifikovaniProdavci  from './components/DobaviVerifikovaneProdavce';
 import Porudzbina from './components/Porudzbina';
 import PrethodnePorudzbine from './components/PrethodnePorudzbine';
+import DodajPorudzbinu from './components/DodajPorudzbinu';
+import DodajArtikal from './components/Artikal';
+
 
 function App() {
   return (
-    <Router>
+   
       
         <Routes>
           <Route path="/" element={<Pocetna />} />
@@ -36,9 +39,11 @@ function App() {
           <Route path='/prikaziSveVerifikovane' element={<SviVerifikovaniProdavci />}/>
           <Route path='/porudzbina' element={<Porudzbina/>}/>
           <Route path='/prethodnePorudzbine/:id' element={<PrethodnePorudzbine/>}/>
+          <Route path='/dodajPorudzbinu' element={<DodajPorudzbinu />}/>
+          <Route path='/dodajArtikal' element={<DodajArtikal />}/>
         </Routes>
       
-    </Router>
+  
   );
 }
 

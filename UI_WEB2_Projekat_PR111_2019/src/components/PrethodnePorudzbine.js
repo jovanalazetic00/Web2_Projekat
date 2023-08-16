@@ -133,41 +133,43 @@ return (
     <thead>
       <tr>
         <th>ID Porudžbine:</th>
-        <th>Cijena:</th>
-        <th>Komentar:</th>
         <th>Adresa:</th>
-        <th>Datum i vrijeme dostave:</th>
+        <th>Komentar:</th>
+        <th>Cijena:</th>
         <th>Status porudzbine:</th>
-        <th> Vrijeme porudzbine</th>
+        <th>Datum i vrijeme dostave:</th>
+        <th>Vrijeme porudzbine</th>
       </tr>
     </thead>
     <tbody>
-      {porudzbine.map((porudzbina) => (
-        <tr key={porudzbina.porudzbinaID}>
-          <td>{porudzbina.porudzbinaID}</td>
-          <td>{porudzbina.cijena}</td>
-          <td>{porudzbina.komentar}</td>
-          <td>{porudzbina.adresa}</td>
-          <td>{porudzbina.datumVrijemeDostave}</td>
+    {porudzbine.map((porudzbina) => (
+        <tr key={porudzbina.idPorudzbine}>
+          <td>{porudzbina.idPorudzbine}</td>
+          <td>{porudzbina.adresaIsporuke}</td>
+          <td>{porudzbina.komentarPorudzbine}</td>
+          <td>{porudzbina.cijenaPorudzbine}</td>
           <td>
               {(() => {
                   switch (porudzbina.statusPorudzbine) {
                   case 0:
-                      return "U_TOKU";
+                      return "UObradi";
                   case 1:
-                      return "ODBIJENO,";
+                      return "Odbijena,";
                   case 2:
-                      return "PRIHVACENO";
+                      return "Prihvacena";
                   case 3:
-                    return "OTKAZANA";
+                    return "Otkazana";
                   default:
                       return "";
                   }
               })()}
             </td>
+          
+          <td>{porudzbina.vrijemeIsporuke}</td>
+          
             <td>{porudzbina.vrijemePorudzbine}</td>
             <td>
-              <button className="btn" onClick={() => prikaziSveArtikle(porudzbina.porudzbinaID)}>
+              <button className="btn" onClick={() => prikaziSveArtikle(porudzbina.idPorudzbine)}>
                 OPSIRNIJE
               </button>
             </td>

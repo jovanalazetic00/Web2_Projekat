@@ -26,8 +26,8 @@ const Porudzbina = () => {
       {  
         navigate(`/prikazArtikala/${id}`);
       };
-          
-      
+
+
   return (
     <div>
     <table>
@@ -65,9 +65,9 @@ const Porudzbina = () => {
                     }
                 })()}
               </td>
-            
+
             <td>{porudzbina.vrijemeIsporuke}</td>
-            
+
               <td>
                 <button className='btn' onClick={() => prikaziSveArtikle(porudzbina.idPorudzbine)}>
                   OPSIRNIJE
@@ -83,5 +83,3 @@ const Porudzbina = () => {
 };
 
 export default Porudzbina;
-
-

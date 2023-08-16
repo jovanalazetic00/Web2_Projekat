@@ -1,9 +1,10 @@
 import React, {useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppBar } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import AuthContext from '../configuration/AuthProvider';
+import { AuthProvider } from '../configuration/AuthProvider';
 
 export default function NavBar(props) {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ export default function NavBar(props) {
   const handleLogoutClick = () => {
         
     localStorage.removeItem('token');
+    navigate('/');
   
   };
   return (

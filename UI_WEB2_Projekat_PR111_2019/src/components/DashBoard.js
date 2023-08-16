@@ -8,15 +8,22 @@ import { DobaviKorisnikaPoId } from "../services/KorisnikService";
 
 const DashBoard = () => {
   const navigate = useNavigate();
-  const [korisnik, setKorisnik] = useState('');
+  const [korisnik, setKorisnik] = useState(null);
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
-  const dekodiranToken = jwtDecode(token);
-  const uloga = dekodiranToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-  const id = dekodiranToken['IdKorisnika'];
-  console.log("Uloga:", uloga);
-  console.log("ID korisnika:", id);
+  let uloga = "";
+  let id = "";
+
+  try {
+    const dekodiranToken = jwtDecode(token);
+    uloga = dekodiranToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    id = dekodiranToken["IdKorisnika"];
+    console.log("Uloga:", uloga);
+    console.log("ID korisnika:", id);
+  } catch (error) {
+    console.error("Greška prilikom dekodiranja tokena:", error);
+  }
 
   useEffect(() => {
     const dobavljenKorisnik = async () => {
@@ -30,27 +37,25 @@ const DashBoard = () => {
       }
     };
 
-    if (uloga === "Prodavac") {
+    if (uloga === "Prodavac" && id) {
       console.log("Pozivanje funkcije za dobavljanje korisnika");
       dobavljenKorisnik();
     }
   }, [id, uloga]);
 
+  console.log("Prikazuje se komponenta Dashboard");
+  console.log("Trenutna uloga:", uloga);
+  console.log("Korisnik:", korisnik);
+
   return (
     <div>
-      {uloga === 'Administrator' && (
-        <AdminStranica></AdminStranica>
+      <h1>Dashboard</h1>
+      {uloga === "Administrator" && <AdminStranica />}
+      {uloga === "Kupac" && <KupacStranica />}
+      {uloga === "Prodavac" && korisnik && korisnik.statusVerifrikacije === 1 && korisnik.verifikovan === true && (
+        <ProdavacStranica />
       )}
-
-      {uloga === 'Kupac' && (
-        <KupacStranica></KupacStranica>
-      )}
-
-      {uloga === 'Prodavac' && korisnik && korisnik.statusVerifrikacije === 1 && korisnik.verifikovan === true && (
-        <ProdavacStranica></ProdavacStranica>
-      )}
-
-      {uloga === 'Prodavac' && korisnik.statusVerifrikacije !== 1 && korisnik.verifikovan === false && (
+      {uloga === "Prodavac" && korisnik && korisnik.statusVerifrikacije !== 1 && korisnik.verifikovan === false && (
         navigate(`/profil/${id}`)
       )}
     </div>

@@ -18,6 +18,7 @@ import Porudzbina from './components/Porudzbina';
 import PrethodnePorudzbine from './components/PrethodnePorudzbine';
 import DodajPorudzbinu from './components/DodajPorudzbinu';
 import DodajArtikal from './components/Artikal';
+import AzuriranjeArtikla from './components/AzuriranjeArtikla';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path='/prethodnePorudzbine/:id' element={<PrethodnePorudzbine/>}/>
           <Route path='/dodajPorudzbinu' element={<DodajPorudzbinu />}/>
           <Route path='/dodajArtikal' element={<DodajArtikal />}/>
+          <Route path='/azuriranjeArtikla/:id' element={<AzuriranjeArtikla />}/>
         </Routes>
       
   

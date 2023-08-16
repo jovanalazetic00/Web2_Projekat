@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import { Button } from "@mui/material";
 import jwtDecode from "jwt-decode";
+import AzuriranjeArtikla from "./AzuriranjeArtikla";
 
 const ProdavacStranica = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  
+  const [prikaziAzuriranjeArtikla, setPrikaziAzuriranjeArtikla] = React.useState(false);
 
   const dekodiranToken = jwtDecode(token);
   const id = dekodiranToken['IdKorisnika'];

@@ -146,7 +146,7 @@ namespace Web_Projekat_PR111_2019.Services
             if (korisnik == null)
             {
                 throw new Exception(string.Format("Korisnik ne postoji! Pogrešan email ili lozinka."));
-                //return Unauthorized();
+                
             }
 
 
@@ -160,7 +160,7 @@ namespace Web_Projekat_PR111_2019.Services
             {
                 new Claim("IdKorisnika", korisnik.IdKorisnika.ToString()),
                 new Claim(ClaimTypes.Role, korisnik.TipKorisnika.ToString()),
-                new Claim("StatusVerifikacije", korisnik.StatusVerifrikacije.ToString()),
+                new Claim("StatusVerifrikacije", korisnik.StatusVerifrikacije.ToString()),
             };
 
 

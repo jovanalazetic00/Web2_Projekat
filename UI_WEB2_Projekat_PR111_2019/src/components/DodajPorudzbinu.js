@@ -78,8 +78,8 @@ const DodajPorudzbinu = () => {
           komentarPorudzbine
         };
   
-      const idPorudzbine = await NovaPorudzbina(reqData);
-      console.log(idPorudzbine);
+      const porudzbinaId = await NovaPorudzbina(reqData);
+      console.log(porudzbinaId);
   
       setAdresaIsporuke('');
       setArtikliIPorudzbine([]);
@@ -89,7 +89,7 @@ const DodajPorudzbinu = () => {
       await SvePorudzbine();
       await PrethodnePorudzbineKupca();
   
-      const por = await DobaviPorudzbinuPoID(idPorudzbine);
+      const por = await DobaviPorudzbinuPoID(porudzbinaId);
       console.log(por.data.vrijemeIsporuke);
       setMessage(por.data.vrijemeIsporuke);
         

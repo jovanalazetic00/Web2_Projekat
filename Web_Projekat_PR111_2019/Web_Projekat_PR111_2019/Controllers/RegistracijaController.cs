@@ -45,7 +45,6 @@ namespace Web_Projekat_PR111_2019.Controllers
             try
             {
                 string token = await registracijaService.LogIn(logDTO);
-
                 return Ok(string.Format("{0}", token));
             }
             catch (Exception e)

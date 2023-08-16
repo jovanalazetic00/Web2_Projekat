@@ -19,7 +19,7 @@ import PrethodnePorudzbine from './components/PrethodnePorudzbine';
 import DodajPorudzbinu from './components/DodajPorudzbinu';
 import DodajArtikal from './components/Artikal';
 import AzuriranjeArtikla from './components/AzuriranjeArtikla';
-
+import MojePorudzbineProd from './components/MojePorudzbine';
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
           <Route path="/adminStranica" element={<AdminStranica />}/>
           <Route path="/kupacStranica" element={<KupacStranica />}/>
           <Route path="/prodavacStranica" element={<ProdavacStranica />}/>
-          <Route path='/potvrdaRegistracije' element={<PotvrdiRegistraciju />}/>
+          <Route path='/potvrdiRegistraciju' element={<PotvrdiRegistraciju />}/>
           <Route path='/dobaviProdavce' element={<ProdavciVerifikacija />}/>
           <Route path='/prikaziSveVerifikovane' element={<SviVerifikovaniProdavci />}/>
           <Route path='/porudzbina' element={<Porudzbina/>}/>
@@ -43,6 +43,7 @@ function App() {
           <Route path='/dodajPorudzbinu' element={<DodajPorudzbinu />}/>
           <Route path='/dodajArtikal' element={<DodajArtikal />}/>
           <Route path='/azuriranjeArtikla/:id' element={<AzuriranjeArtikla />}/>
+          <Route path='/mojePorudzbine/:id' element={<MojePorudzbineProd />}/>
         </Routes>
       
   

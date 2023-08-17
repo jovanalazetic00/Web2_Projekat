@@ -1,34 +1,36 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { SviKorisnici, ObrisiKorisnika } from "../services/KorisnikService";
 import './Tabele.css'
-
 
 const Korisnik = () => {
   const [korisnici, setKorisnici] = useState([]);
   const [id, setID] = useState('');
 
   useEffect(() => {
-    const get = async() => 
-    {
+    const get = async () => {
+      try {
         const response = await SviKorisnici();
-        console.log(response);
+        console.log("Dobavljeni korisnici:", response.data);
         setKorisnici(response.data);
+      } catch (error) {
+        console.log("Greška pri dobavljanju korisnika:", error);
+      }
     }
     get();
   }, []);
 
   const handleObrisi = async (id) => {
     try {
+      console.log("Brisanje korisnika sa ID:", id);
       await ObrisiKorisnika(id);
-      const ostaliKorisnici = korisnici.filter((korisnik) => korisnik.IdKorisnika !== id);
+      const ostaliKorisnici = korisnici.filter((korisnik) => korisnik.idKorisnika !== id);
       setKorisnici(ostaliKorisnici);
 
       setID('');
     } catch (error) {
-      console.log(error);
+      console.log("Greška pri brisanju korisnika:", error);
     }
   };
-  
 
   return (
     <div className="form">

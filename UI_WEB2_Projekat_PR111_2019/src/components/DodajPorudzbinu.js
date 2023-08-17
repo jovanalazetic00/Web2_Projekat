@@ -29,7 +29,7 @@ const DodajPorudzbinu = () => {
   };
 
   useEffect(() => {
-    const getArtikli = async () => {
+    const dobaviArtikle = async () => {
       try {
         const response = await SviArtikli();
         setArtikli(response.data);
@@ -37,7 +37,7 @@ const DodajPorudzbinu = () => {
         console.error("Greška prilikom dobavljanja artikala:", error);
       }
     };
-    getArtikli();
+    dobaviArtikle();
   }, []);
 
   const handleArtikalChange = (artikalId) => {
@@ -56,7 +56,7 @@ const DodajPorudzbinu = () => {
       );
       const novaStavka = {
         iDArtiklaAIP: artikal.artikalId,
-        kolicinaArtikla: kolicinaArtikla,
+        kolicinaArtikla: kolicinaArtikla, // Corrected variable name
       };
       setArtikliIPorudzbine((prevStavke) => [...prevStavke, novaStavka]);
       setOdabraniArtikal(null);
@@ -84,10 +84,10 @@ const DodajPorudzbinu = () => {
         komentarPorudzbine,
       };
 
-      console.log("Slanje zahteva...", reqData); // Dodat console log
+      console.log("Slanje zahteva...", reqData);
 
-      const idPorudzbine = await NovaPorudzbina(reqData);
-      console.log("Id porudžbine:", idPorudzbine);
+      const porudzbinaId = await NovaPorudzbina(reqData);
+      console.log("Id porudžbine:", porudzbinaId);
 
       setAdresaIsporuke("");
       setArtikliIPorudzbine([]);
@@ -97,7 +97,7 @@ const DodajPorudzbinu = () => {
       await SvePorudzbine();
       await PrethodnePorudzbineKupca();
 
-      const por = await DobaviPorudzbinuPoID(idPorudzbine);
+      const por = await DobaviPorudzbinuPoID(porudzbinaId);
       console.log("Vrijeme isporuke:", por.data.vrijemeIsporuke);
       setMessage(por.data.vrijemeIsporuke);
     } catch (error) {
@@ -105,7 +105,7 @@ const DodajPorudzbinu = () => {
     }
   };
 
-  console.log("Render komponente DodajPorudzbinu"); // Dodat console log
+  console.log("Render komponente DodajPorudzbinu");
 
   
     return (

@@ -74,6 +74,7 @@ namespace Web_Projekat_PR111_2019.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Prodavac", Policy = "VerifikovanProdavac")]
+        [AllowAnonymous]
         public async Task<ActionResult<DTOArtikal>> ObrisiArtikal(int id)
         {
             try

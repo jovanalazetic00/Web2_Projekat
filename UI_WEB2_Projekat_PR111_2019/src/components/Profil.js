@@ -6,11 +6,13 @@ import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import jwtDecode from 'jwt-decode';
 import validator from 'validator';
+import { useNavigate } from 'react-router-dom';
 import { ProvjeriMail } from '../services/LogovanjeService';
 
 const Profil = () => {
   const{id} = useParams();
   const [korisnik, setKorisnik] = useState([]);
+  const navigate = useNavigate();
 
   const [ime, setIme] = useState('');
   const [prezime, setPrezime] = useState('');
@@ -141,6 +143,7 @@ const Profil = () => {
     const handleLogoutClick = () => {
         
       localStorage.removeItem('token');
+      navigate('/');
     
     };
 

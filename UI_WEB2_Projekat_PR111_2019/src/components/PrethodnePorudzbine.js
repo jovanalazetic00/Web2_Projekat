@@ -7,7 +7,7 @@ import { OtkaziPorudzbinu } from "../services/PorudzbinaService";
 import { useNavigate, Link } from "react-router-dom";
 
 const PrethodnePorudzbine = () => {
-    const [porudzbine, setPorudzbina] = useState([]);
+    const[porudzbine, setPorudzbina] = useState([]);
     const[svePorudzbine, setSvePorudzbine] = useState([]);
     const[message, setMessage] = useState('');
      
@@ -77,9 +77,9 @@ return (
         <th>Adresa:</th>
         <th>Komentar:</th>
         <th>Cijena:</th>
-        <th>Status porudzbine:</th>
+        <th>Status porudžbine:</th>
         <th>Datum i vrijeme dostave:</th>
-        <th> Vrijeme porudzbine</th>
+        <th>Vrijeme porudžbine</th>
       </tr>
     </thead>
     <tbody>
@@ -136,9 +136,9 @@ return (
         <th>Adresa:</th>
         <th>Komentar:</th>
         <th>Cijena:</th>
-        <th>Status porudzbine:</th>
+        <th>Status porudžbine:</th>
         <th>Datum i vrijeme dostave:</th>
-        <th>Vrijeme porudzbine</th>
+        <th>Vrijeme porudžbine</th>
       </tr>
     </thead>
     <tbody>

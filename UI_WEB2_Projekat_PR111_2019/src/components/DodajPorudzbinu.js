@@ -1,114 +1,123 @@
-import React, {useState, useEffect} from "react";
-import { DobaviPorudzbinuPoID, NovaPorudzbina, SvePorudzbine } from "../services/PorudzbinaService";
-import './Tabele.css';
+import React, { useState, useEffect } from "react";
+import {
+  DobaviPorudzbinuPoID,
+  NovaPorudzbina,
+  SvePorudzbine,
+} from "../services/PorudzbinaService";
+import "./Tabele.css";
 import { SviArtikli } from "../services/ArtikalService";
 import { PrethodnePorudzbineKupca } from "../services/PorudzbinaService";
 import { Link } from "react-router-dom";
 
 const DodajPorudzbinu = () => {
+  const [adresaIsporuke, setAdresaIsporuke] = useState("");
+  const [komentarPorudzbine, setKomentarPorudzbine] = useState("");
+  const [artikli, setArtikli] = useState([]);
+  const [odabraniArtikal, setOdabraniArtikal] = useState(null);
+  const [kolicinaArtikla, setKolicinaArtikla] = useState(0);
+  const [artikliIPorudzbine, setArtikliIPorudzbine] = useState([]);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
-    const [adresaIsporuke, setAdresaIsporuke] = useState('');
-    const [komentarPorudzbine, setKomentarPorudzbine] = useState('');
-    const [artikli, setArtikli] = useState([]);
-    const [odabraniArtikal, setOdabraniArtikal] = useState(null);
-    const [kolicinaArtikla, setKolicinaArtikla] = useState(0);
-    const [artikliIPorudzbine, setArtikliIPorudzbine] = useState([]);
-    const[message, setMessage] = useState('');
-    const[error, setError] = useState('');
-  
-    
-    const osvjeziArtikle = async () => {
+  const osvjeziArtikle = async () => {
+    try {
+      const response = await SviArtikli();
+      setArtikli(response.data);
+    } catch (error) {
+      console.error("Greška prilikom osvežavanja artikala:", error);
+    }
+  };
+
+  useEffect(() => {
+    const getArtikli = async () => {
       try {
         const response = await SviArtikli();
         setArtikli(response.data);
       } catch (error) {
-        console.error('Greška prilikom osvežavanja artikala:', error);
+        console.error("Greška prilikom dobavljanja artikala:", error);
       }
     };
-  
-  
-    useEffect(() => {
-      const getArtikli = async () => {
-        try {
-          const response = await SviArtikli();
-          setArtikli(response.data);
-        } catch (error) {
-          console.error('Greška prilikom dobavljanja artikala:', error);
-        }
-      }
-      getArtikli();
-    }, []);
-  
-      const handleArtikalChange = (artikalId) => {
-        setOdabraniArtikal(artikalId);
-        setKolicinaArtikla(0);
+    getArtikli();
+  }, []);
+
+  const handleArtikalChange = (artikalId) => {
+    setOdabraniArtikal(artikalId);
+    setKolicinaArtikla(0);
+  };
+
+  const handleKolicinaArtiklaChange = (e) => {
+    setKolicinaArtikla(Number(e.target.value));
+  };
+
+  const handleDodajStavku = () => {
+    if (odabraniArtikal && kolicinaArtikla > 0) {
+      const artikal = artikli.find(
+        (artikal) => artikal.artikalId === odabraniArtikal
+      );
+      const novaStavka = {
+        iDArtiklaAIP: artikal.artikalId,
+        kolicinaArtikla: kolicinaArtikla,
       };
-  
-      const handleKolicinaChange = (e) => {
-        setKolicinaArtikla(Number(e.target.value));
-      };
-  
-      const handleDodajStavku = () => {
-        if (odabraniArtikal && kolicinaArtikla > 0) {
-          const artikal = artikli.find((artikal) => artikal.artikalId === odabraniArtikal);
-          const novaStavka = {
-            iDArtiklaAIP: artikal.artikalId,
-            kolicinaArtikla: kolicinaArtikla
-          };
-          setArtikliIPorudzbine(prevStavke => [...prevStavke, novaStavka]);
-          setOdabraniArtikal(null);
-          setKolicinaArtikla(0);
-        }
-      };
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-  
-      if (adresaIsporuke.trim() === '' ||
-        kolicinaArtikla === 0 ||
-        komentarPorudzbine.trim() === '' ) {
-        setError('Sva polja su obavezna.');
+      setArtikliIPorudzbine((prevStavke) => [...prevStavke, novaStavka]);
+      setOdabraniArtikal(null);
+      setKolicinaArtikla(0);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (
+      adresaIsporuke.trim() === "" ||
+      kolicinaArtikla === 0 ||
+      komentarPorudzbine.trim() === "" ||
+      artikliIPorudzbine.length === 0
+    ) {
+      setError("Sva polja su obavezna.");
       return;
-      }
-  
-      try {
-        const reqData = {
-          adresaIsporuke,
-          artikliIPorudzbine,
-          komentarPorudzbine
-        };
-  
-      const porudzbinaId = await NovaPorudzbina(reqData);
-      console.log(porudzbinaId);
-  
-      setAdresaIsporuke('');
+    }
+
+    try {
+      const reqData = {
+        adresaIsporuke,
+        artikliIPorudzbine,
+        komentarPorudzbine,
+      };
+
+      console.log("Slanje zahteva...", reqData); // Dodat console log
+
+      const idPorudzbine = await NovaPorudzbina(reqData);
+      console.log("Id porudžbine:", idPorudzbine);
+
+      setAdresaIsporuke("");
       setArtikliIPorudzbine([]);
-      setKomentarPorudzbine('');
-  
+      setKomentarPorudzbine("");
+
       osvjeziArtikle();
       await SvePorudzbine();
       await PrethodnePorudzbineKupca();
-  
-      const por = await DobaviPorudzbinuPoID(porudzbinaId);
-      console.log(por.data.vrijemeIsporuke);
+
+      const por = await DobaviPorudzbinuPoID(idPorudzbine);
+      console.log("Vrijeme isporuke:", por.data.vrijemeIsporuke);
       setMessage(por.data.vrijemeIsporuke);
-        
-  
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    } catch (error) {
+      console.error("Greška prilikom slanja zahteva:", error);
+    }
+  };
+
+  console.log("Render komponente DodajPorudzbinu"); // Dodat console log
+
   
     return (
       <div>
         <h2>Dodaj porudžbinu</h2>
         <form onSubmit={handleSubmit}>
           <div className="form">
-            <label htmlFor="adresa">Adresa:</label>
+            <label htmlFor="adresaIsporuke">Adresa:</label>
             <input
               type="text"
-              id="adresa"
-              name="Adresa"
+              id="adresaIsporuke"
+              name="AdresaIsporuke"
               value={adresaIsporuke}
               onChange={(e) => setAdresaIsporuke(e.target.value)}
             />
@@ -163,23 +172,23 @@ const DodajPorudzbinu = () => {
           </div>
   
           <div className="form">
-            <label htmlFor="kolicina">Količina:</label>
+            <label htmlFor="kolicinaArtikla">Količina:</label>
             <input
               type="number"
-              id="kolicina"
-              name="Kolicina"
+              id="kolicinaArtikla"
+              name="KolicinaArtikla"
               value={kolicinaArtikla}
               min="1"
-              onChange={handleKolicinaChange}
+              onChange={handleKolicinaArtiklaChange}
             />
             <button type="button" onClick={handleDodajStavku}>Dodaj</button>
           </div>
   
           <div className="form">
-            <label htmlFor="komentar">Komentar:</label>
+            <label htmlFor="komentarPorudzbine">Komentar:</label>
             <textarea
-              id="komentar"
-              name="Komentar"
+              id="komentarPorudzbine"
+              name="KomentarPorudzbine"
               value={komentarPorudzbine}
               onChange={(e) => setKomentarPorudzbine(e.target.value)}
             />

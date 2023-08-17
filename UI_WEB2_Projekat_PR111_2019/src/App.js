@@ -20,21 +20,25 @@ import DodajPorudzbinu from './components/DodajPorudzbinu';
 import DodajArtikal from './components/Artikal';
 import AzuriranjeArtikla from './components/AzuriranjeArtikla';
 import MojePorudzbineProd from './components/MojePorudzbine';
+import NovePorudzbineProdavca from './components/NovePorudzbineProdavca';
+import ArtikliPorudzbine from './components/PrikazArtikalaPorudzbine';
+import ArtikliPorudzbineProdavac from './components/PrikazArtPorProdavac';
+import ArtikliPorudzbineKupac from './components/PrikazArtPorKupac';
 
 function App() {
   return (
    
       
         <Routes>
-          <Route path="/" element={<Pocetna />} />
-          <Route path="/logovanje" element={<Logovanje />} />
-          <Route path="/registracija" element={<Registracija />} />
-          <Route path="/dashBoard" element={<DashBoard />} />
-          <Route path="/korisnik" element={<Korisnik />}/>
-          <Route path="/profil/:id" element={<Profil />}/>
-          <Route path="/adminStranica" element={<AdminStranica />}/>
-          <Route path="/kupacStranica" element={<KupacStranica />}/>
-          <Route path="/prodavacStranica" element={<ProdavacStranica />}/>
+          <Route path='/' element={<Pocetna />} />
+          <Route path='/logovanje' element={<Logovanje />} />
+          <Route path='/registracija' element={<Registracija />} />
+          <Route path='/dashBoard' element={<DashBoard />} />
+          <Route path='/korisnik' element={<Korisnik />}/>
+          <Route path='/profil/:id' element={<Profil />}/>
+          <Route path='/adminStranica' element={<AdminStranica />}/>
+          <Route path='/kupacStranica' element={<KupacStranica />}/>
+          <Route path='/prodavacStranica' element={<ProdavacStranica />}/>
           <Route path='/potvrdiRegistraciju' element={<PotvrdiRegistraciju />}/>
           <Route path='/dobaviProdavce' element={<ProdavciVerifikacija />}/>
           <Route path='/prikaziSveVerifikovane' element={<SviVerifikovaniProdavci />}/>
@@ -44,6 +48,10 @@ function App() {
           <Route path='/dodajArtikal' element={<DodajArtikal />}/>
           <Route path='/azuriranjeArtikla/:id' element={<AzuriranjeArtikla />}/>
           <Route path='/mojePorudzbine/:id' element={<MojePorudzbineProd />}/>
+          <Route path='/novePorudzbine/:id' element={<NovePorudzbineProdavca />}/>
+          <Route path='/prikazArtikala/:id' element={<ArtikliPorudzbine />}/>
+          <Route path='/prikazArtikalaProdavac/:id' element={<ArtikliPorudzbineProdavac />}/>
+          <Route path='/prikazArtikalaKupac/:id' element={<ArtikliPorudzbineKupac/>}/>
         </Routes>
       
   

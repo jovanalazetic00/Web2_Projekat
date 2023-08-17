@@ -77,7 +77,7 @@ const AzuriranjeArtikla = () => {
         formData.append('id', id);
         formData.append('naziv', naziv);
         formData.append('cijena', cijena);
-        formData.append('kolicina', kolicinaArtikla);
+        formData.append('kolicinaArtikla', kolicinaArtikla);
         formData.append('opis', opis);
         formData.append('slika', slika);
 

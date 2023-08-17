@@ -38,11 +38,11 @@ const Korisnik = () => {
         <thead className="form">
           <tr>
             <th>KorisnikID:</th>
-            <th>Korisničko ime:</th>
             <th>Ime:</th>
             <th>Prezime:</th>
-            <th>Adresa:</th>
+            <th>Korisničko ime:</th>
             <th>Datum rođenja:</th>
+            <th>Adresa:</th>
             <th>Tip korisnika:</th>
           </tr>
         </thead>
@@ -50,11 +50,11 @@ const Korisnik = () => {
           {korisnici.map((korisnik) => (
             <tr key={korisnik.idKorisnika}>
               <td>{korisnik.idKorisnika}</td>
-              <td>{korisnik.korisnickoIme}</td>
               <td>{korisnik.ime}</td>
               <td>{korisnik.prezime}</td>
-              <td>{korisnik.adresa}</td>
+              <td>{korisnik.korisnickoIme}</td>
               <td>{korisnik.datumRodjenja}</td>
+              <td>{korisnik.adresa}</td>
               <td>
                 {(() => {
                   switch (korisnik.tipKorisnika) {

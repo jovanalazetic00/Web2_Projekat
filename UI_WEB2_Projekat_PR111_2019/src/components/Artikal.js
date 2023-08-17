@@ -100,7 +100,7 @@ return (
       <input
         type="number"
         id="kolicinaArtikla"
-        name="kolicinaArtikla"
+        name="KolicinaArtikla"
         value={kolicinaArtikla}
         onChange={(e) => setKolicinaArtikla(e.target.value)}
       />

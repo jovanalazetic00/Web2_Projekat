@@ -211,13 +211,14 @@ return (
           <td>{korisnik.email}</td>
         </tr>
         <tr>
-          <th>Adresa</th>
-          <td>{korisnik.adresa}</td>
-        </tr>
-        <tr>
           <th>Datum rođenja</th>
           <td>{korisnik.datumRodjenja}</td>
         </tr>
+        <tr>
+          <th>Adresa</th>
+          <td>{korisnik.adresa}</td>
+        </tr>
+        
         <tr>
           <th>Uloga</th>
           <td>

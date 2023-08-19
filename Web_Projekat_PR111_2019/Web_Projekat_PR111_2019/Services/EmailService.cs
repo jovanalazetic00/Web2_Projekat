@@ -33,7 +33,7 @@ namespace Web_Projekat_PR111_2019.Services
         public void SlanjePoruke(string email, string verifikacija)
         {
             var mail = new MimeMessage();
-            mail.From.Add(MailboxAddress.Parse("projekatweb2@outlook.com"));
+            mail.From.Add(MailboxAddress.Parse("milosavalazetic@outlook.com"));
             mail.To.Add(MailboxAddress.Parse(email));
 
             mail.Subject = "Verifikacija";
@@ -43,7 +43,7 @@ namespace Web_Projekat_PR111_2019.Services
 
             ;
             smtp.Connect("smtp-mail.outlook.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("projekatweb2@outlook.com", "rokovnik123");
+            smtp.Authenticate("milosavalazetic@outlook.com", "milosava12345");
             smtp.Send(mail);
             smtp.Disconnect(true);
 

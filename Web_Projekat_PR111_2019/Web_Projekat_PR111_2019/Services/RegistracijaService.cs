@@ -14,6 +14,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Google.Apis.Auth;
+
 
 namespace Web_Projekat_PR111_2019.Services
 {
@@ -23,7 +25,7 @@ namespace Web_Projekat_PR111_2019.Services
         private readonly IMapper maper;
         private readonly IRegistracijaRepository registracijaRepository;
         private readonly DBContext dbContext;
-        private readonly IConfiguration Configuration;
+        private readonly IConfiguration configuration;
         private readonly IKorisnikRepository korisnikRepository;
 
         public RegistracijaService(IMapper maper, IRegistracijaRepository registracijaRepository, DBContext dbContext, IConfiguration configuration, IKorisnikRepository korisnikRepository)
@@ -31,9 +33,13 @@ namespace Web_Projekat_PR111_2019.Services
             this.maper = maper;
             this.registracijaRepository = registracijaRepository;
             this.dbContext = dbContext;
-            Configuration = configuration;
+            this.configuration = configuration;
             this.korisnikRepository = korisnikRepository;
         }
+
+        // private readonly IConfigurationSection googleConfig;
+
+
 
         public async Task PotvrdiRegistraciju(int id)
         {
@@ -164,11 +170,11 @@ namespace Web_Projekat_PR111_2019.Services
             };
 
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwtConfig:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["jwtConfig:Key"]));
 
             var token = new JwtSecurityToken(
-            Configuration["jwtConfig:Issuer"],
-            Configuration["jwtConfig:Audience"],
+            configuration["jwtConfig:Issuer"],
+            configuration["jwtConfig:Audience"],
             claims,
             expires: DateTime.UtcNow.AddDays(1),
             signingCredentials: new SigningCredentials(
@@ -190,5 +196,93 @@ namespace Web_Projekat_PR111_2019.Services
             }
             return true;
         }
+
+        //public async Task<string> GoogleLogovanje(string token)
+        //{
+        //    DTOGoogle googleKorisnik = await VerifikacijGoogleTokena(token);
+
+
+        //    if (googleKorisnik == null)
+        //    {
+
+        //        throw new Exception("Nepostojeci ili neispravan google token korisnika");
+
+        //    }
+
+        //    List<Korisnik> sviKorisnici = await korisnikRepository.DobaviKorisnike();
+
+
+        //    Korisnik korisnik = sviKorisnici.Find(k => k.Email.Equals(googleKorisnik.Email));
+
+        //    if (korisnik == null)
+        //    {
+        //        korisnik = new Korisnik()
+        //        {
+        //            Ime = googleKorisnik.Ime,
+        //            Prezime = googleKorisnik.Prezime,
+        //            KorisnickoIme = googleKorisnik.KorisnickoIme,
+        //            Email = googleKorisnik.Email,
+        //            Lozinka = "",
+        //            PotvrdaLozinke = "",
+        //            Adresa = "",
+        //            DatumRodjenja = DateTime.Now,
+        //            TipKorisnika = TipKorisnika.Kupac,
+        //            StatusVerifrikacije = StatusVerifikacije.Verifikovan,
+        //            Slika = new byte[0],
+        //        };
+
+
+        //        dbContext.Korisnici.Add(korisnik);
+        //        await dbContext.SaveChangesAsync();
+        //    }
+
+        //    var claims = new List<Claim>
+        //    {
+        //        new Claim("IdKorisnika", korisnik.IdKorisnika.ToString()),
+        //        new Claim(ClaimTypes.Role, korisnik.TipKorisnika.ToString()),
+        //        new Claim("StatusVerifrikacije", korisnik.StatusVerifrikacije.ToString()),
+        //    };
+
+
+
+        //    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["jwtConfig:Key"]));
+
+        //    var token1 = new JwtSecurityToken(
+        //      configuration["jwtConfig:Issuer"],
+        //      configuration["jwtConfig:Audience"],
+        //      claims,
+        //      expires: DateTime.UtcNow.AddDays(1),
+        //      signingCredentials: new SigningCredentials(
+        //      key, SecurityAlgorithms.HmacSha256Signature));
+
+
+        //    var tokenn = new JwtSecurityTokenHandler().WriteToken(token1);
+
+        //    return tokenn;
+        //}
+
+        //private async Task<DTOGoogle> VerifikacijGoogleTokena(string loginToken)
+        //{
+           
+        //    var validacija = new GoogleJsonWebSignature.ValidationSettings()
+        //    {
+        //        Audience = new List<string>() { googleConfig.Value }
+        //    };
+
+        //    var googleInfoKorisnika = await GoogleJsonWebSignature.ValidateAsync(loginToken, validacija);
+
+        //    DTOGoogle googleKorisnik = new()
+        //    {
+        //        Email = googleInfoKorisnika.Email,
+        //        KorisnickoIme = googleInfoKorisnika.Email.Split("@")[0],
+        //        Ime = googleInfoKorisnika.GivenName,
+        //        Prezime = googleInfoKorisnika.FamilyName
+
+        //    };
+
+        //    return googleKorisnik;
+
+            
+        //}
     }
 }

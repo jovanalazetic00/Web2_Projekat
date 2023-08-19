@@ -84,5 +84,21 @@ namespace Web_Projekat_PR111_2019.Controllers
                 return NotFound(false);
             }
         }
+
+        //[HttpPost("googleLogovanje")]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> GoogleLogIn([FromForm] string googleToken)
+        //{
+        //    try
+        //    {
+        //        string token = await registracijaService.GoogleLogovanje(googleToken);
+
+        //        return Ok(string.Format("{0}", token));
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return BadRequest($"Greska: {e.InnerException?.Message}");
+        //    }
+        //}
     }
 }

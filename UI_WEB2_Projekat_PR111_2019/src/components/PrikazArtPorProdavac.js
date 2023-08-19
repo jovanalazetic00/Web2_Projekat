@@ -33,7 +33,7 @@ return (
           <th>ID:</th>
           <th>Naziv</th>
           <th>Cijena</th>
-          <th>Količina</th>
+          <th>Količina artikla</th>
           <th>Opis</th>
           <th>Slika</th>
         </tr>

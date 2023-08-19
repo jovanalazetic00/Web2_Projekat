@@ -33,7 +33,7 @@ return (
           <th>ID:</th>
           <th>Naziv</th>
           <th>Cijena</th>
-          <th>Količina</th>
+          <th>Količina artikla</th>
           <th>Opis</th>
           <th>Slika</th>
         </tr>
@@ -44,7 +44,7 @@ return (
             <td>{artikal.artikalId}</td>
             <td>{artikal.naziv}</td>
             <td>{artikal.cijena}</td>
-            <td>{artikal.kolicinaAtikla}</td>
+            <td>{artikal.kolicinaArtikla}</td>
             <td>{artikal.opis}</td>
             <td>
     

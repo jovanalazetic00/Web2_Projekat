@@ -3,7 +3,7 @@
     public class DTOArtikliIPorudzbine
     {
         public int IdArtikalIPorudzbina { get; set; }
-        public int Kolicina { get; set; }
+        public int KolicinaArtikla { get; set; }
         public DTOArtikal Artikal { get; set; } 
     }
 }

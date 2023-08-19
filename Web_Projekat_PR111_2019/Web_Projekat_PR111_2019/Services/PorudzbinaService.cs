@@ -142,7 +142,7 @@ namespace Web_Projekat_PR111_2019.Services
             return porudzbineKupca;
         }
 
-        public async Task<int> DodajPoruzbinu(DTODodajPorudzbinu porudzbinaDTO)
+        public async Task<int> DodajPoruzbinu(DTODodajPorudzbinu dodajPorudzbinuDTO)
         {
             var idClaim = httpContextAccessor.HttpContext.User.FindFirst("IdKorisnika");
 
@@ -157,14 +157,14 @@ namespace Web_Projekat_PR111_2019.Services
                 throw new Exception("ID nije konvertovan u broj");
             }
 
-            if (string.IsNullOrEmpty(porudzbinaDTO.AdresaIsporuke))
+            if (string.IsNullOrEmpty(dodajPorudzbinuDTO.AdresaIsporuke))
             {
                 throw new Exception("Polje adresa je obavezno!");
             }
 
             var korisnik = await korisnikRepository.DobaviKorisnikaPoId(id);
 
-            var porudzbina = maper.Map<Porudzbina>(porudzbinaDTO);
+            var porudzbina = maper.Map<Porudzbina>(dodajPorudzbinuDTO);
 
             porudzbina.IdKorisnika = id;
             porudzbina.StatusPorudzbine = StatusPorudzbine.UObradi;
@@ -173,11 +173,12 @@ namespace Web_Projekat_PR111_2019.Services
             porudzbina.Korisnik = korisnik;
 
 
-            foreach (var stavkaDTO in porudzbinaDTO.Stavke)
+            foreach (var stavkaDTO in dodajPorudzbinuDTO.ArtikliIPorudzbine)
             {
-                var artikal = await artikalRepository.DobaviArtikalPoId(stavkaDTO.IdArtikalIPorudzbina);
+                var artikal = await artikalRepository.DobaviArtikalPoId(stavkaDTO.IDArtiklaAIP);
+                Console.WriteLine(stavkaDTO.IDArtiklaAIP);
 
-                if (stavkaDTO.Kolicina > artikal.KolicinaArtikla)
+                if (stavkaDTO.KolicinaArtikla > artikal.KolicinaArtikla)
                 {
                     throw new Exception("Nedovoljna kolicina artikla na stanju");
                 }
@@ -188,7 +189,7 @@ namespace Web_Projekat_PR111_2019.Services
                     IDArtiklaAIP = artikal.ArtikalId,
                     Porudzbina = porudzbina,
                     Artikal = artikal,
-                    KolicinaArtikla = stavkaDTO.Kolicina
+                    KolicinaArtikla = stavkaDTO.KolicinaArtikla
                 };
 
                 var existingStavka = porudzbina.ArtikliIPorudzbine.FirstOrDefault(s => s.IDPorudzbineAIP == stavka1.IDPorudzbineAIP && s.IDArtiklaAIP == stavka1.IDArtiklaAIP);
@@ -210,8 +211,8 @@ namespace Web_Projekat_PR111_2019.Services
                 }
 
                 //300 je cijena dostave
-                artikal.KolicinaArtikla -= stavkaDTO.Kolicina;
-                porudzbina.CijenaPorudzbine += stavkaDTO.Kolicina * artikal.Cijena + 300;
+                artikal.KolicinaArtikla -= stavkaDTO.KolicinaArtikla;
+                porudzbina.CijenaPorudzbine += stavkaDTO.KolicinaArtikla * artikal.Cijena + 300;
 
             }
 

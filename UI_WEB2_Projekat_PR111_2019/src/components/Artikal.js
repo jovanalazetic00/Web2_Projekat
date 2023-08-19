@@ -96,7 +96,7 @@ return (
         onChange={(e) => setCijena(e.target.value)}
       />
 
-     <label htmlFor="kolicinaArtikla">Kolicina:</label>
+     <label htmlFor="kolicinaArtikla">Kolicina artikla:</label>
       <input
         type="number"
         id="kolicinaArtikla"

@@ -36,12 +36,12 @@ return (
   <table>
     <thead>
         <tr>
-          <th>ID Porudžbine:</th>
-          <th>Adresa:</th>
-          <th>Komentar:</th>
-          <th>Cijena:</th>
-          <th>Status porudzbine:</th>
-          <th>Datum i vrijeme dostave:</th>
+          <th>ID porudžbine:</th>
+          <th>Adresa isporuke:</th>
+          <th>Komentar porudžbine:</th>
+          <th>Cijena porudžbine:</th>
+          <th>Status porudžbine:</th>
+          <th>Vrijeme isporuke:</th>
           <th></th>
         </tr>
       </thead>

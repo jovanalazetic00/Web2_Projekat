@@ -34,11 +34,11 @@ const Porudzbina = () => {
       <thead>
         <tr>
           <th>ID Porudžbine:</th>
-          <th>Adresa:</th>
-          <th>Komentar:</th>
-          <th>Cijena:</th>
+          <th>Adresa isporuke:</th>
+          <th>Komentar porudžbine:</th>
+          <th>Cijena porudžbine:</th>
           <th>Status porudzbine:</th>
-          <th>Datum i vrijeme dostave:</th>
+          <th>Vrijeme isporuke:</th>
           <th></th>
         </tr>
       </thead>

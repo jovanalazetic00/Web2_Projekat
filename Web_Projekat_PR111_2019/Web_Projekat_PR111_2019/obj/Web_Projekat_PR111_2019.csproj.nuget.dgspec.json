@@ -51,13 +51,17 @@
               "target": "Package",
               "version": "[0.1.0, )"
             },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.61.0, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.1.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[5.0.10, )"
+              "version": "[6.0.0, )"
             },
             "Microsoft.Azure.DocumentDB.Core": {
               "target": "Package",

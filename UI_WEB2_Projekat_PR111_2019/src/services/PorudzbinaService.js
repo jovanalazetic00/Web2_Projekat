@@ -10,6 +10,8 @@ export const SvePorudzbine = async() => {
 export const NovaPorudzbina = async(reqData) =>{
 
     const response = await axioss.post(`/Porudzbina/dodajPorudzbinu`, reqData);
+    const token = localStorage.getItem("token");
+    axioss.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     return response.data;
 };
 

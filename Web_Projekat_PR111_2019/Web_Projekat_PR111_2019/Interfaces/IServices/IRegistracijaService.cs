@@ -10,5 +10,6 @@ namespace Web_Projekat_PR111_2019.Interfaces.IServices
         Task PotvrdiRegistraciju(int id);
         Task<string> LogIn(DTOLogIn logovanjeDTO);
         Task<bool> ProvjeraEmaila(string email);
+        //Task<string> GoogleLogovanje(string token);
     }
 }

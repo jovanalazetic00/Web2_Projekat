@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +54,8 @@ var mapperConfig = new MapperConfiguration(cfg =>
 {
     cfg.AddProfile<MappingProfile>();
 });
+
+
 
 builder.Services.AddScoped<Email>();
 
@@ -122,6 +125,8 @@ builder.Services.AddAuthorization(options =>
 
 });
 
+builder.Services.AddHostedService<AzuriranjeStatusaPorudzbine>();
+
 var app = builder.Build();
 
 // ...
@@ -137,7 +142,9 @@ app.UseHttpsRedirection();
 app.UseCors("ReactAppPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();
 
 public class MappingProfile : Profile
@@ -152,10 +159,10 @@ public class MappingProfile : Profile
         CreateMap<Porudzbina, DTOPorudzbina>();
         CreateMap<DTODodajPorudzbinu, Porudzbina>();
         CreateMap<DTOArtikliIPorudzbine, ArtikalIPorudzbina>().ReverseMap();
-    
+
         CreateMap<DTODodajArtikalIPorudzbina, ArtikalIPorudzbina>();
         CreateMap<Porudzbina, DTOPorudzbina>().ReverseMap();
- 
+
         CreateMap<DTOAzuriranjeKorisnika, Korisnik>();
         CreateMap<DTODodajArtikal, Artikal>();
 

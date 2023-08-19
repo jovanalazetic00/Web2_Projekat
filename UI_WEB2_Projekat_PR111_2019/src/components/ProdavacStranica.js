@@ -82,18 +82,7 @@ return (
       </Button>
     </NavBar>
 
-    {/* {prikaziAzuriranjeArtikla && (
-      <div>
-        <AzuriranjeArtikla />
-        <Button
-          color="inherit"
-          style={{ backgroundColor: '#d3d3d3' }}
-          onClick={handleZatvoriAzuriranjeArtikla}
-        >
-          Zatvori
-        </Button>
-      </div>
-    )} */}
+    
   </>
 );
 };

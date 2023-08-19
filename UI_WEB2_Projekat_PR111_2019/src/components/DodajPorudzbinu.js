@@ -49,16 +49,16 @@ const DodajPorudzbinu = () => {
     setKolicinaArtikla(Number(e.target.value));
   };
 
-  const handleDodajStavku = () => {
+  const handleDodajArtikalIPorudzbina = () => {
     if (odabraniArtikal && kolicinaArtikla > 0) {
       const artikal = artikli.find(
         (artikal) => artikal.artikalId === odabraniArtikal
       );
-      const novaStavka = {
+      const novaArtikalIPorudzbina = {
         iDArtiklaAIP: artikal.artikalId,
-        kolicinaArtikla: kolicinaArtikla, // Corrected variable name
+        kolicinaArtikla: kolicinaArtikla, 
       };
-      setArtikliIPorudzbine((prevStavke) => [...prevStavke, novaStavka]);
+      setArtikliIPorudzbine((prevArtikalIPorudzbina) => [...prevArtikalIPorudzbina, novaArtikalIPorudzbina]);
       setOdabraniArtikal(null);
       setKolicinaArtikla(0);
     }
@@ -66,45 +66,44 @@ const DodajPorudzbinu = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (
-      adresaIsporuke.trim() === "" ||
+      adresaIsporuke.trim() === '' ||
       kolicinaArtikla === 0 ||
-      komentarPorudzbine.trim() === "" ||
-      artikliIPorudzbine.length === 0
+      komentarPorudzbine.trim() === ''
     ) {
       setError("Sva polja su obavezna.");
       return;
     }
-
+  
     try {
       const reqData = {
         adresaIsporuke,
         artikliIPorudzbine,
         komentarPorudzbine,
       };
-
+  
       console.log("Slanje zahteva...", reqData);
-
-      const porudzbinaId = await NovaPorudzbina(reqData);
-      console.log("Id porudžbine:", porudzbinaId);
-
-      setAdresaIsporuke("");
+  
+      const idPor = await NovaPorudzbina(reqData);
+      console.log("Id porudžbine:", idPor);
+  
+      setAdresaIsporuke('');
       setArtikliIPorudzbine([]);
-      setKomentarPorudzbine("");
-
+      setKomentarPorudzbine('');
+  
       osvjeziArtikle();
       await SvePorudzbine();
       await PrethodnePorudzbineKupca();
-
-      const por = await DobaviPorudzbinuPoID(porudzbinaId);
+  
+      const por = await DobaviPorudzbinuPoID(idPor);
       console.log("Vrijeme isporuke:", por.data.vrijemeIsporuke);
       setMessage(por.data.vrijemeIsporuke);
     } catch (error) {
       console.error("Greška prilikom slanja zahteva:", error);
     }
   };
-
+  
   console.log("Render komponente DodajPorudzbinu");
 
   
@@ -113,7 +112,7 @@ const DodajPorudzbinu = () => {
         <h2>Dodaj porudžbinu</h2>
         <form onSubmit={handleSubmit}>
           <div className="form">
-            <label htmlFor="adresaIsporuke">Adresa:</label>
+            <label htmlFor="adresaIsporuke">Adresa isporuke:</label>
             <input
               type="text"
               id="adresaIsporuke"
@@ -172,7 +171,7 @@ const DodajPorudzbinu = () => {
           </div>
   
           <div className="form">
-            <label htmlFor="kolicinaArtikla">Količina:</label>
+            <label htmlFor="kolicinaArtikla">Količina artikla:</label>
             <input
               type="number"
               id="kolicinaArtikla"
@@ -181,11 +180,11 @@ const DodajPorudzbinu = () => {
               min="1"
               onChange={handleKolicinaArtiklaChange}
             />
-            <button type="button" onClick={handleDodajStavku}>Dodaj</button>
+            <button type="button" onClick={handleDodajArtikalIPorudzbina}>Dodaj</button>
           </div>
   
           <div className="form">
-            <label htmlFor="komentarPorudzbine">Komentar:</label>
+            <label htmlFor="komentarPorudzbine">Komentar porudzbine:</label>
             <textarea
               id="komentarPorudzbine"
               name="KomentarPorudzbine"

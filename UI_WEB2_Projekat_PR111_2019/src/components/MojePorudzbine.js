@@ -36,11 +36,11 @@ return (
     <thead>
       <tr>
           <th>ID Porudžbine:</th>
-          <th>Adresa:</th>
-          <th>Komentar:</th>
-          <th>Cijena:</th>
-          <th>Status porudzbine:</th>
-          <th>Datum i vrijeme dostave:</th>
+          <th>Adresa isporuke:</th>
+          <th>Komentar porudžbine:</th>
+          <th>Cijena porudžbine:</th>
+          <th>Status porudžbine:</th>
+          <th>Vrijeme isporuke:</th>
       </tr>
     </thead>
     <tbody>
@@ -68,14 +68,6 @@ return (
               </td>
 
             <td>{porudzbina.vrijemeIsporuke}</td>
-            {/* <td>
-                  {porudzbina.slika && ( 
-                      <img src={`data:image/png;base64,${porudzbina.slika}`} 
-                       alt="Slika korisnika"
-                       width={80}
-                      height={80}
-                  />)}
-             </td>   */}
             <td>
               <button className="btn" onClick={() => prikaziSveArtikleProdavac(porudzbina.idPorudzbine)}>
                 OPSIRNIJE

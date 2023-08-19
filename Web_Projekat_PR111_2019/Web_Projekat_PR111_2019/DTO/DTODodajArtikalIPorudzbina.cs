@@ -2,7 +2,7 @@
 {
     public class DTODodajArtikalIPorudzbina
     {
-        public int IdArtikalIPorudzbina { get; set; }
-        public int Kolicina { get; set; }
+        public int IDArtiklaAIP { get; set; }
+        public int KolicinaArtikla { get; set; }
     }
 }

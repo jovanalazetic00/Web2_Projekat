@@ -11,8 +11,9 @@
           "AWSSDK.DynamoDBv2": "3.7.103.12",
           "AutoMapper": "10.1.1",
           "BCrypt.Net": "0.1.0",
+          "Google.Apis.Auth": "1.61.0",
           "MailKit": "4.1.0",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.10",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.0",
           "Microsoft.Azure.DocumentDB.Core": "2.19.0",
           "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
@@ -113,6 +114,44 @@
           }
         }
       },
+      "Google.Apis/1.61.0": {
+        "dependencies": {
+          "Google.Apis.Core": "1.61.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.dll": {
+            "assemblyVersion": "1.61.0.0",
+            "fileVersion": "1.61.0.0"
+          }
+        }
+      },
+      "Google.Apis.Auth/1.61.0": {
+        "dependencies": {
+          "Google.Apis": "1.61.0",
+          "Google.Apis.Core": "1.61.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {
+            "assemblyVersion": "1.61.0.0",
+            "fileVersion": "1.61.0.0"
+          },
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {
+            "assemblyVersion": "1.61.0.0",
+            "fileVersion": "1.61.0.0"
+          }
+        }
+      },
+      "Google.Apis.Core/1.61.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {
+            "assemblyVersion": "1.61.0.0",
+            "fileVersion": "1.61.0.0"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "runtime": {
           "lib/net6.0/Humanizer.dll": {
@@ -161,14 +200,14 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Authentication.JwtBearer/5.0.10": {
+      "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.0": {
         "dependencies": {
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.21.0"
         },
         "runtime": {
-          "lib/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
-            "assemblyVersion": "5.0.10.0",
-            "fileVersion": "5.0.1021.41022"
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52608"
           }
         }
       },
@@ -2778,6 +2817,27 @@
       "path": "bouncycastle.cryptography/2.2.1",
       "hashPath": "bouncycastle.cryptography.2.2.1.nupkg.sha512"
     },
+    "Google.Apis/1.61.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KUVqG6MRC7E8anPOLefqb+wnDeIS6IJ1B09GaXg07vAHGVnGxJ8odAtpnCQCN3aUzao3gFnSSEKawDvFrJpYZQ==",
+      "path": "google.apis/1.61.0",
+      "hashPath": "google.apis.1.61.0.nupkg.sha512"
+    },
+    "Google.Apis.Auth/1.61.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1tXnTa9WaimJdlrIyHnhjjgFX6fQ1r4ClWqlK9ZYF5YPyswG1GbWhhlPyQg615BnHSulmRINlXIi8AbGJsc1yQ==",
+      "path": "google.apis.auth/1.61.0",
+      "hashPath": "google.apis.auth.1.61.0.nupkg.sha512"
+    },
+    "Google.Apis.Core/1.61.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/COXAFLc1SrLDZl7Ahhi0ZyNHM6ADvdd73UjIPXr1MRubHTrBgvdfwoTrCL0C8C6w0ur/RIR1RHUR5orSJozGg==",
+      "path": "google.apis.core/1.61.0",
+      "hashPath": "google.apis.core.1.61.0.nupkg.sha512"
+    },
     "Humanizer.Core/2.14.1": {
       "type": "package",
       "serviceable": true,
@@ -2813,12 +2873,12 @@
       "path": "messagepack.annotations/2.5.108",
       "hashPath": "messagepack.annotations.2.5.108.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Authentication.JwtBearer/5.0.10": {
+    "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-WGMw2zDSgLcxSO0jwBPpp20e+LpvAFe/AhUlEQIV5IkPJOIZtEKbF58tRZb/qoAIJ00GfREsSLZAey1OVDI2KA==",
-      "path": "microsoft.aspnetcore.authentication.jwtbearer/5.0.10",
-      "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.5.0.10.nupkg.sha512"
+      "sha512": "sha512-eIhpX25uUn33Ornnh718V2G/nESvk3TNX2FjTarv634GLfE50Fhz2geJ/QYpSmFaUIQ1hkZPfd9i0LcpZ9bfLQ==",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/6.0.0",
+      "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.JsonPatch/7.0.5": {
       "type": "package",

@@ -120,7 +120,7 @@ const AzuriranjeArtikla = () => {
             <th>Artikal ID</th>
             <th>Naziv</th>
             <th>Cijena</th>
-            <th>Količina</th>
+            <th>Količina artikla</th>
             <th>Opis</th>
             <th>Slika</th>
           </tr>
@@ -191,7 +191,7 @@ const AzuriranjeArtikla = () => {
         <br />
         <div className='form'>
         <label>
-            Kolicina:
+            Kolicina artikla:
             <input
             type="text"
             value={kolicinaArtikla}

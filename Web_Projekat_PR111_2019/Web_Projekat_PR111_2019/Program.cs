@@ -20,6 +20,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Dodajte servise u kontejner.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+var emailConfig = builder.Configuration.GetSection("EmailConfig").Get<Email>();
+var googleConfig = builder.Configuration.GetSection("Web_client");
+
+builder.Services.AddSingleton(emailConfig);
+builder.Services.AddSingleton(googleConfig);
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web_Projekat_PR111_2019", Version = "v1" });

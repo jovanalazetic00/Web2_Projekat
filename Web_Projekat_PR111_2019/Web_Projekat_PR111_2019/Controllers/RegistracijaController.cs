@@ -85,20 +85,20 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
         }
 
-        //[HttpPost("googleLogovanje")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> GoogleLogIn([FromForm] string googleToken)
-        //{
-        //    try
-        //    {
-        //        string token = await registracijaService.GoogleLogovanje(googleToken);
+        [HttpPost("googleLogovanje")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GoogleLogIn([FromForm] string googleToken)
+        {
+            try
+            {
+                string token = await registracijaService.GoogleLogovanje(googleToken);
 
-        //        return Ok(string.Format("{0}", token));
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest($"Greska: {e.InnerException?.Message}");
-        //    }
-        //}
+                return Ok(string.Format("{0}", token));
+            }
+            catch (Exception e)
+            {
+                return BadRequest($"Greska: {e.InnerException?.Message}");
+            }
+        }
     }
 }

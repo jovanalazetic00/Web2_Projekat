@@ -12,39 +12,28 @@ namespace Web_Projekat_PR111_2019.Services
 {
     public class EmailService : IEmailService
     {
-        private readonly Email emailKonfiguracija;
+        private readonly Email emailConfig;
         public IConfiguration configuration;
 
-        public EmailService(IConfiguration configuration)
+        public EmailService(Email emailConfig)
         {
-            this.configuration = configuration;
+            this.emailConfig = emailConfig;
         }
 
-
-        private Email EmailConfig
-        {
-            get
-            {
-                var emailConfig = configuration.GetSection("EmailConfig").Get<Email>();
-                return emailConfig;
-            }
-        }
-
+       
         public void SlanjePoruke(string email, string verifikacija)
         {
-            var mail = new MimeMessage();
-            mail.From.Add(MailboxAddress.Parse("milosavalazetic@outlook.com"));
-            mail.To.Add(MailboxAddress.Parse(email));
+            var email_ = new MimeMessage();
+            email_.From.Add(MailboxAddress.Parse("milosavalazetic@outlook.com"));
+            email_.To.Add(MailboxAddress.Parse(email));
 
-            mail.Subject = "Verifikacija";
-            mail.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = "Korisnikova verifikacija " + verifikacija };
+            email_.Subject = "Verifikacija";
+            email_.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = "Korisnikova verifikacija " + verifikacija };
 
-            using var smtp = new SmtpClient(new ProtocolLogger("smtp.log"));
-
-            ;
+            using var smtp = new SmtpClient();
             smtp.Connect("smtp-mail.outlook.com", 587, SecureSocketOptions.StartTls);
             smtp.Authenticate("milosavalazetic@outlook.com", "milosava12345");
-            smtp.Send(mail);
+            smtp.Send(email_);
             smtp.Disconnect(true);
 
 

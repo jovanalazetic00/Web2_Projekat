@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './Logovanje.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
+import { googleLogovanje } from '../services/LogovanjeService';
 import { LogovanjeService, ProvjeriMail, setHeader } from '../services/LogovanjeService';
-
+import {GoogleOAuthProvider} from '@react-oauth/google';
 
 
   
@@ -49,8 +51,34 @@ export const Logovanje = () => {
         }
     };
 
+    const handleGoogleLogin = async (data) => {
+      try {
+  
+        const formData = new FormData();
+     
+        formData.append('googleToken', data.credential);
+        console.log(data.credential);
+          
+        console.log(formData);
+        console.log(formData);
+        console.log(formData);
+        const token = await googleLogovanje(formData);
+        
+        localStorage.setItem('token', token.data);
+        setHeader(token);
+  
+        navigate('/dashBoard');
+       
+      } catch (error) {
+        console.log(error);
+        setError('Google logovanje nije uspjelo');
+      }
+    };
 
- 
+    const handleGoogleLoginError = (error) => {
+      console.log(error);
+      setError('Google logovanje nije uspjelo');
+    };
 
   return (
     <div className="form">
@@ -74,6 +102,13 @@ export const Logovanje = () => {
         <br/>
       </form>
       
+      <GoogleOAuthProvider clientId="1026974469683-dc5tp26c92lp4ode6k0i3cfnd5qvfd5b.apps.googleusercontent.com">
+        <GoogleLogin onSuccess={handleGoogleLogin} onError={handleGoogleLoginError} />
+        <br />
+        {/* <label className="nazad" htmlFor="/home">
+          <Link to="/">Povratak na pocetnu stranicu</Link>
+        </label> */}
+      </GoogleOAuthProvider>
         {error && <p className="error">{error}</p>}
         <br />
         <label className="nazad" htmlFor="/home">

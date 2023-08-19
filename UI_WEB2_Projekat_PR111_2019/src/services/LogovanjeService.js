@@ -38,6 +38,16 @@ export const setHeader = (token) =>
   }
 };
 
+export const googleLogovanje = async (data) => {
+
+  return await axioss.post(`/Registracija/googleLogovanje`, 
+   data,
+   {headers: 
+    {
+      "Content-Type":"multipart/form-data"
+    }
+  });
+};
 
 export const ProvjeriMail = async(email) => {
  

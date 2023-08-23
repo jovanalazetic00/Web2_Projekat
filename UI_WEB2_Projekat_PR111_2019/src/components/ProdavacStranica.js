@@ -47,7 +47,7 @@ return (
         style={{ backgroundColor: '#d3d3d3' }}
         onClick={handleClickProfil}
       >
-        Profil 
+        Profil korisnika
       </Button>
       <Button
         color="inherit"
@@ -62,7 +62,7 @@ return (
         style={{ backgroundColor: '#d3d3d3' }}
         onClick={handleClickAzurirajArtikal}
       >
-        Azuriraj artikal
+        Ažuriraj artikal
       </Button>
 
       <Button
@@ -70,7 +70,7 @@ return (
         style={{ backgroundColor: '#d3d3d3' }}
         onClick={handleClickNovePorudzbine}
       >
-        Nove porudzbine
+        Nove porudžbine
       </Button>
 
       <Button
@@ -78,7 +78,7 @@ return (
         style={{ backgroundColor: '#d3d3d3' }}
         onClick={handleClickMojePorudzbine}
       >
-        Moje porudzbine
+        Moje porudžbine
       </Button>
     </NavBar>
 

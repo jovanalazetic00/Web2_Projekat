@@ -10,7 +10,7 @@ export default function NavBar(props) {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
 
-  const handleHomeClick = () => {
+  const handlePocetnaClick = () => {
     navigate('/');
   };
 
@@ -25,8 +25,8 @@ export default function NavBar(props) {
   return (
     <AppBar position="static" sx={{ backgroundColor: '#d3d3d3' }}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
-        <Button color="inherit" onClick={handleHomeClick}>
-          Home
+        <Button color="inherit" onClick={handlePocetnaClick}>
+          Početna
         </Button>
         {props.children}
         <Button color="inherit" onClick={handleLogoutClick}>

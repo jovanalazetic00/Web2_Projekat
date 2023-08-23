@@ -110,11 +110,11 @@ return (
           
             <td>{sve.vrijemePorudzbine}</td>
             <td>
-            <button className="btn" onClick={() => otkaziPorudzbinu(sve.idPorudzbine)}>Otkazi</button>
+            <button className="btn" onClick={() => otkaziPorudzbinu(sve.idPorudzbine)}>OTKAŽI</button>
             </td>
             <td>
               <button className="btn" onClick={() => prikaziSveArtikle(sve.idPorudzbine)}>
-                OPSIRNIJE
+              DETALJNIJE
               </button>
             </td>
         </tr>
@@ -170,7 +170,7 @@ return (
             <td>{porudzbina.vrijemePorudzbine}</td>
             <td>
               <button className="btn" onClick={() => prikaziSveArtikle(porudzbina.idPorudzbine)}>
-                OPSIRNIJE
+                DETALJNIJE
               </button>
             </td>
         </tr>

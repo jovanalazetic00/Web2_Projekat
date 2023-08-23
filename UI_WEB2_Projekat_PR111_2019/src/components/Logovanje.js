@@ -98,7 +98,7 @@ export const Logovanje = () => {
             required
           />
         </div>
-        <button className="btn">Loguj se</button>
+        <button className="btn">Uloguj se</button>
         <br/>
       </form>
       
@@ -111,8 +111,9 @@ export const Logovanje = () => {
       </GoogleOAuthProvider>
         {error && <p className="error">{error}</p>}
         <br />
-        <label className="nazad" htmlFor="/home">
-          <Link to="/">Povratak na početnu stranicu</Link>
+        <label className="nazad" htmlFor="/pocetna">
+          <Link to="/">Povratak na početnu stranicu</Link><br/>
+          <Link to="/registracija">Nemate nalog? Registrujte se!</Link>
         </label>
 
         <p>  {message && (

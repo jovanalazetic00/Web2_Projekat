@@ -104,6 +104,11 @@ namespace Web_Projekat_PR111_2019.Services
                 throw new Exception(string.Format("Neispravan unos email-a! Pokusajte ponovo."));
             }
 
+            if (registracijaDTO.DatumRodjenja > DateTime.Now)
+            {
+                throw new Exception(string.Format("Datum rodjenja ne moze biti u buducnosti!"));
+            }
+
             await registracijaRepository.Registracija(registracijaKorisnika);
 
             return maper.Map<DTOKorisnik>(registracijaKorisnika);

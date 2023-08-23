@@ -38,7 +38,7 @@ const AdminStranica = () => {
           color="inherit"
           style = {{backgroundColor: '#d3d3d3'}}
           onClick={handleClickProfil}>
-          Profil 
+          Profil korisnika
         </Button>
 
         <Button
@@ -52,7 +52,7 @@ const AdminStranica = () => {
           color="inherit"
           style = {{backgroundColor: '#d3d3d3'}}
           onClick={handleClickPorudzbine}>
-          Sve porudzbine 
+          Sve porudžbine 
         </Button>
       </NavBar>
     </>

@@ -1,91 +1,99 @@
-/* Registracija.css */
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
 
-.container {
+body {
+  background-image: url('C:/Users/User/Desktop/online-shopping-t.jpg');
+  background-size: cover;
+  background-position: center;
+  font-family: 'PT Sans', sans-serif;
+  margin: 0;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: blue;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  background: #C0C0C0;
+  border: 2px solid #2e1ccc;
+  color: #2e1ccc;
+  cursor: pointer;
 }
 
 .form {
   max-width: 400px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #2e1ccc;
+}
+
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"],
+.form select,
+.form input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.form select {
+  height: 34px;
 }
 
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
-select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  transition: border-color 0.3s;
-}
-
-input[type="file"] {
-  margin-top: 5px;
-}
-
-select {
-  appearance: none;
-  padding-right: 25px; /* Add a dropdown arrow indicator */
-  background: url("data:image/svg+xml;charset=utf8,%3Csvg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E") no-repeat right 10px center;
-  background-color: white;
-  background-size: 12px 12px;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="date"]:focus,
-select:focus {
-  border-color: #007bff;
-}
-
-.btn {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
+.form button {
+  padding: 10px 20px;
+  background-color: #2e1ccc;
+  color: #fff;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
 }
 
-.nazad {
-  display: block;
+.form button:hover {
+  background-color: #5936a1;
+}
+
+.form .nazad {
+  margin-top: 20px;
   text-align: center;
-  margin-top: 10px;
-  font-size: 14px;
 }
 
-.message {
+.form .nazad a {
+  color: #2e1ccc;
+  text-decoration: none;
+}
+
+.form .nazad a:hover {
+  text-decoration: underline;
+}
+
+.error-message {
   color: red;
   margin-top: 10px;
 }
 
-/* Media Query for Small Screens */
-@media (max-width: 480px) {
-  .form {
-    max-width: 100%;
-  }
+.success-message {
+  color: green;
+  margin-top: 10px;
 }

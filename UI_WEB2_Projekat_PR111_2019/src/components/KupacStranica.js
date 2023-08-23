@@ -40,7 +40,7 @@ return (
         style = {{backgroundColor: '#d3d3d3'}}
         onClick={handleClickProfil}
       >
-        Profil 
+        Profil korisnika
       </Button>
 
       <Button
@@ -48,7 +48,7 @@ return (
         style = {{backgroundColor: '#d3d3d3'}}
         onClick={handleClickNovaPorudzbina}
       >
-          Nova porudzbina
+          Nova porudžbina
       </Button>
 
       <Button
@@ -56,7 +56,7 @@ return (
         style = {{backgroundColor: '#d3d3d3'}}
         onClick={handleClickPrethodnaPorudzbina}
       >
-          Prethodne porudzbine
+          Prethodne porudžbine
       </Button>
       
       </NavBar>

@@ -70,7 +70,7 @@ return (
             <td>{porudzbina.vrijemeIsporuke}</td>
             <td>
               <button className="btn" onClick={() => prikaziSveArtikleProdavac(porudzbina.idPorudzbine)}>
-                OPSIRNIJE
+               DETALJNIJE
               </button>
             </td>
         </tr>

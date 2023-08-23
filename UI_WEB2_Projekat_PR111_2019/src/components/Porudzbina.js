@@ -70,7 +70,7 @@ const Porudzbina = () => {
 
               <td>
                 <button className='btn' onClick={() => prikaziSveArtikle(porudzbina.idPorudzbine)}>
-                  OPSIRNIJE
+                  DETALJNIJE
                 </button>
               </td>
           </tr>

@@ -21,6 +21,13 @@ const Registracija = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const today = new Date();
+    const selectedDate = new Date(datumRodjenja);
+    if (selectedDate > today) {
+      setMessage('Datum rođenja ne može biti u budućnosti.');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('ime', ime);
     formData.append('prezime', prezime);
@@ -176,7 +183,8 @@ const Registracija = () => {
         </div>
       </form>
       <label className='nazad' htmlFor="/home">
-        <Link to="/">Povratak na početnu stranicu</Link>
+        <Link to="/">Povratak na početnu stranicu</Link><br/>
+        <Link to="/logovanje">Imate nalog? Prijavite se!</Link>
       </label>
       {message && (
         <div>

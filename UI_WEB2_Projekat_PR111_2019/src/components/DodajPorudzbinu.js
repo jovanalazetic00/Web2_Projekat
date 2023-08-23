@@ -184,7 +184,7 @@ const DodajPorudzbinu = () => {
           </div>
   
           <div className="form">
-            <label htmlFor="komentarPorudzbine">Komentar porudzbine:</label>
+            <label htmlFor="komentarPorudzbine">Komentar porudžbine:</label>
             <textarea
               id="komentarPorudzbine"
               name="KomentarPorudzbine"

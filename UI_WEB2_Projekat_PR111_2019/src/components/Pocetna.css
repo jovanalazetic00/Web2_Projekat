@@ -1,99 +1,47 @@
 /* Pocetna.css */
 
 body {
-  font-family: Arial, sans-serif;
+  background-image: url('C:/Users/User/Desktop/online-shopping-t.jpg');
+  background-size: cover;
+  background-position: center;
+  font-family: 'PT Sans', sans-serif;
   margin: 0;
   padding: 0;
-}
-
-.header {
-  background-color: #333;
-  padding: 10px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.header img {
-  width: 150px; /* Prilagodite veličinu loga prema potrebi */
+  min-height: 100vh;
 }
 
 .nav-menu {
-  display: flex;
-  justify-content: center;
-  background-color: #333;
-  padding: 10px 0;
+  position: absolute;
+  top: 20px; /* Postavi meni na vrh */
+  left: 20px; /* Postavi meni na levo */
 }
 
 .nav-menu ul {
   list-style: none;
   display: flex;
+  flex-direction: column; /* Prikazuje linkove vertikalno */
+  align-items: flex-start; /* Poravnanje linkova s leva */
+  padding: 0;
+  margin: 0;
 }
 
 .nav-menu li {
-  margin-right: 20px;
+  margin: 0;
+  margin-bottom: 10px; /* Dodat razmak između linkova */
 }
 
 .nav-menu a {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  color: white;
   text-decoration: none;
-  color: #fff; /* Promenite boju teksta na belu */
-  font-weight: bold;
-  font-size: 16px;
-  transition: color 0.3s ease-in-out;
+  border: 2px solid white;
+  background-color: transparent;
+  transition: color 0.3s, background-color 0.3s;
 }
 
 .nav-menu a:hover {
-  color: #ff9900;
-}
-
-.container {
-  max-width: 1200px; /* Prilagodite širinu kontejnera prema potrebi */
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.product {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
-}
-
-.product img {
-  max-width: 100%;
-  height: auto;
-}
-
-.product h2 {
-  font-size: 18px;
-  margin: 10px 0;
-}
-
-.product p {
-  font-size: 16px;
-  color: #555;
-}
-
-.footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
-}
-
-.footer a {
-  color: #fff;
-  text-decoration: none;
-}
-
-/* Dodatni stilovi za responzivnost */
-@media screen and (max-width: 768px) {
-  .nav-menu ul {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .nav-menu li {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
+  color: #ffffff80;
+  background-color: rgba(255, 255, 255, 0.2);
 }

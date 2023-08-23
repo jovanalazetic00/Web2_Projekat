@@ -150,6 +150,7 @@ namespace Web_Projekat_PR111_2019.Services
             }
 
             await korisnikRepository.VerifikacijaProdavca(id);
+            emailService.SlanjePoruke(korisnik.Email, " je prihvacena!");
         }
 
         public async Task OdbijVerifikaciju(int id)
@@ -162,6 +163,7 @@ namespace Web_Projekat_PR111_2019.Services
             }
 
             await korisnikRepository.OdbijVerifikaciju(id);
+            emailService.SlanjePoruke(korisnik.Email, "je odbijena!");
         }
 
         public async Task<List<Korisnik>> DobaviSveProdavce()

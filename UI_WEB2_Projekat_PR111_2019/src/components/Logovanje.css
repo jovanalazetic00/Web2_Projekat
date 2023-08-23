@@ -1,70 +1,99 @@
-.forma-container {
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
+body {
+  background-image: url('C:/Users/User/Desktop/online-shopping-t.jpg');
+  background-size: cover;
+  background-position: center;
+  font-family: 'PT Sans', sans-serif;
+  margin: 0;
+  padding: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: blue;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  background: #C0C0C0;
+  border: 2px solid #2e1ccc;
+  color: #2e1ccc;
+  cursor: pointer;
+}
+
+.form {
+  max-width: 400px;
+  margin: 0 auto;
   padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-  background-color: #fff;
 }
 
-.forma-container h2 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-}
-
-.forma-container form div {
-  margin-bottom: 15px;
-}
-
-.forma-container label {
+.form label {
   display: block;
+  margin-bottom: 8px;
   font-weight: bold;
-  margin-bottom: 5px;
+  color: #2e1ccc;
 }
 
-.forma-container input[type="text"],
-.forma-container input[type="email"],
-.forma-container input[type="password"] {
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"],
+.form select,
+.form input[type="file"] {
   width: 100%;
   padding: 10px;
+  margin-bottom: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.forma-container button {
+.form select {
+  height: 34px;
+}
+
+.form button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #2e1ccc;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
 }
 
-.forma-container button:hover {
-  background-color: #0056b3;
+.form button:hover {
+  background-color: #5936a1;
 }
 
-.error-container {
-  color: #ff0000;
-  margin-top: 10px;
-}
-
-.success-container {
-  color: #008000;
-  margin-top: 10px;
-}
-
-.forma-container a {
-  display: block;
-  margin-top: 15px;
+.form .nazad {
+  margin-top: 20px;
   text-align: center;
-  color: #007bff;
+}
+
+.form .nazad a {
+  color: #2e1ccc;
   text-decoration: none;
 }
 
-.forma-container a:hover {
+.form .nazad a:hover {
   text-decoration: underline;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.success-message {
+  color: green;
+  margin-top: 10px;
 }

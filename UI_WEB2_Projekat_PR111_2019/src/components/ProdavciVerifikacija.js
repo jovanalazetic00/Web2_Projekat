@@ -109,7 +109,9 @@ return (
             ))}
           </tbody>
         </table>
-        <Link to="/prikaziSveVerifikovane"> Prikazi verifikovane prodavce</Link>
+        <div className="prikazi-sve-verifikovane-link">
+          <Link to="/prikaziSveVerifikovane">Prikazi verifikovane prodavce</Link>
+        </div>
 
 
       <h2>Odobri verifikaciju prodavca</h2>
@@ -134,7 +136,7 @@ return (
         Odbij 
       </button>
      
-      <Link to="/dashBoard"> Dash Board</Link>
+      <label className='nazad' htmlFor="/dashBoard"> <Link to="/dashBoard">Dash Board</Link> </label>
         </div>
     );
 };

@@ -32,7 +32,7 @@ namespace Web_Projekat_PR111_2019.Controllers
             }
             catch (Exception e)
             {
-                //return BadRequest($"Greska: {e.InnerException?.Message}");
+                
                 return BadRequest(new { errors = new List<string> { e.Message } });
             }
         }

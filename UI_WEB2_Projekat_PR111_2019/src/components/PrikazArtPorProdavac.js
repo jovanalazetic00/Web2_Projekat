@@ -59,11 +59,15 @@ return (
       </tbody>
     </table>
     <div>
-    <Link to = {`/mojePorudzbine/${id}`}> Moje porudzbine </Link> 
-     </div>
-     <div>
-    <Link to = {`/novePorudzbine/${id}`}> Nove porudzbine </Link>
-    </div>
+    <Link to={`/mojePorudzbine/${id}`} style={{ color: 'white' }}>
+      Moje porudžbine
+    </Link>
+  </div>
+  <div>
+    <Link to={`/novePorudzbine/${id}`} style={{ color: 'white' }}>
+      Nove porudžbine
+    </Link>
+  </div>
     </div>
   );
 };

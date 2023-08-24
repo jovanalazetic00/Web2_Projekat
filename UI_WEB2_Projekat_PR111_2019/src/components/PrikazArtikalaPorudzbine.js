@@ -59,7 +59,9 @@ const ArtikliPorudzbine = () => {
         ))}
       </tbody>
     </table>
-    <Link to="/porudzbina"> Nazad</Link>
+    <Link to="/porudzbina" style={{ color: 'white' }}>
+  Nazad
+</Link>
     </div>
   );
 };

@@ -182,7 +182,7 @@ namespace Web_Projekat_PR111_2019.Services
             expires: DateTime.UtcNow.AddDays(1),
             signingCredentials: new SigningCredentials(
              key, SecurityAlgorithms.HmacSha256Signature));
-            //return new JwtSecurityTokenHandler().WriteToken(token);
+            
 
             var tokenn = new JwtSecurityTokenHandler().WriteToken(token);
 
@@ -204,7 +204,7 @@ namespace Web_Projekat_PR111_2019.Services
 
         public async Task<string> GoogleLogovanje(string token)
         {
-            DTOGoogle googleKorisnik = await VerifikacijGoogleTokena(token);
+            DTOGoogle googleKorisnik = await VerifikacijaGoogleTokena(token);
 
 
             if (googleKorisnik == null)
@@ -266,7 +266,7 @@ namespace Web_Projekat_PR111_2019.Services
             return tokenn;
         }
 
-        private async Task<DTOGoogle> VerifikacijGoogleTokena(string loginToken)
+        private async Task<DTOGoogle> VerifikacijaGoogleTokena(string loginToken)
         {
 
             var validacija = new GoogleJsonWebSignature.ValidationSettings()

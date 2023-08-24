@@ -82,7 +82,8 @@ const DobaviVerifikovaneProdavce = () => {
           </tbody>
         </table>
        <br/><br/>
-        <Link to="/dobaviProdavce"> Nazad</Link>
+        
+        <label className='nazad' htmlFor="/dobaviProdavce"> <Link to="/dobaviProdavce">Nazad</Link> </label>
     
       </div>
     );

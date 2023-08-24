@@ -64,7 +64,7 @@ h2 {
 
 .form button {
   display: block;
-  margin: 0 auto; /* Centriranje dugmeta */
+  margin: 0 auto; 
   padding: 10px 20px;
   background-color: #C0C0C0;
   color: black;
@@ -75,7 +75,7 @@ h2 {
 }
 
 .form button:hover {
-  background-color: #5936a1;
+  background-color: #2b188a;
 }
 
 .form .nazad {
@@ -83,12 +83,31 @@ h2 {
   text-align: center;
 }
 
-.form .nazad a {
-  color: blueviolet;
+.form a {
+  color: blue; 
   text-decoration: none;
 }
 
-.form .nazad a:hover {
+.form a:hover {
+  text-decoration: underline;
+}
+
+/* Stilovi za linkove van forme */
+.nazad a {
+  color: white;
+  text-decoration: none;
+}
+
+.nazad a:hover {
+  text-decoration: underline;
+}
+
+.prikazi-sve-verifikovane-link a {
+  color: white;
+  text-decoration: none;
+}
+
+.prikazi-sve-verifikovane-link a:hover {
   text-decoration: underline;
 }
 
@@ -102,11 +121,33 @@ h2 {
   margin-top: 10px;
 }
 
+
+
+.porudzbina-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.artikli-lista {
+  flex: 1;
+  padding: 20px;
+}
+
+.forma-narucivanja {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+
 /* Stilovi za tabele */
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: rgba(233, 240, 244, 0.9); /* Providna pozadinska boja tabele */
+  background-color: rgba(233, 240, 244, 0.9); 
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 

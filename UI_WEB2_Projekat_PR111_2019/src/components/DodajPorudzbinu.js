@@ -111,66 +111,10 @@ const DodajPorudzbinu = () => {
       <div>
         <h2>Dodaj porudžbinu</h2>
         <form onSubmit={handleSubmit}>
-          <div className="form">
-            <label htmlFor="adresaIsporuke">Adresa isporuke:</label>
-            <input
-              type="text"
-              id="adresaIsporuke"
-              name="AdresaIsporuke"
-              value={adresaIsporuke}
-              onChange={(e) => setAdresaIsporuke(e.target.value)}
-            />
-          </div>
+         
   
-          <div>
-            <h2>Dostupni artikli</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>Artikal ID</th>
-                  <th>Naziv</th>
-                  <th>Cijena</th>
-                  <th>Količina artikla</th>
-                  <th>Opis</th>
-                  <th>Slika</th>
-                  <th>Odaberi</th>
-                </tr>
-              </thead>
-              <tbody>
-                {artikli.map((artikal) => (
-                  <tr key={artikal.artikalId}>
-                    <td>{artikal.artikalId}</td>
-                    <td>{artikal.naziv}</td>
-                    <td>{artikal.cijena}</td>
-                    <td>{artikal.kolicinaArtikla}</td>
-                    <td>{artikal.opis}</td>
-                    
-                    <td>
-                  {artikal.slika && ( 
-                  <img src={`data:image/png;base64,${artikal.slika}`} 
-                            alt="Slika korisnika"
-                            width={100}
-                            height={100}
-                    />)}
-            
-                    </td>
-                    <td>
-                      <input
-                        type="radio"
-                        name="odabraniArtikal"
-                        value={artikal.artikalId}
-                        checked={odabraniArtikal === artikal.artikalId}
-                        onChange={() => handleArtikalChange(artikal.artikalId)}
-                      />
-                    </td>
-                  </tr>
-                ))}
+          <div className="form">
           
-              </tbody>
-            </table>
-          </div>
-  
-          <div className="form">
             <label htmlFor="kolicinaArtikla">Količina artikla:</label>
             <input
               type="number"
@@ -192,9 +136,70 @@ const DodajPorudzbinu = () => {
               onChange={(e) => setKomentarPorudzbine(e.target.value)}
             />
           </div>
+
+          <div className="form">
+            <label htmlFor="adresaIsporuke">Adresa isporuke:</label>
+            <input
+              type="text"
+              id="adresaIsporuke"
+              name="AdresaIsporuke"
+              value={adresaIsporuke}
+              onChange={(e) => setAdresaIsporuke(e.target.value)}
+            />
+          </div>
   
           <button className="btn" type="submit">Poruči</button>
         </form>
+
+        <div>
+            <h2>Dostupni artikli</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Artikal ID</th>
+                    <th>Naziv</th>
+                    <th>Cijena</th>
+                    <th>Količina artikla</th>
+                    <th>Opis</th>
+                    <th>Slika</th>
+                    <th>Odaberi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {artikli.map((artikal) => (
+                    <tr key={artikal.artikalId}>
+                      <td>{artikal.artikalId}</td>
+                      <td>{artikal.naziv}</td>
+                      <td>{artikal.cijena}</td>
+                      <td>{artikal.kolicinaArtikla}</td>
+                      <td>{artikal.opis}</td>
+                      
+                      <td>
+                    {artikal.slika && ( 
+                    <img src={`data:image/png;base64,${artikal.slika}`} 
+                              alt="Slika korisnika"
+                              width={100}
+                              height={100}
+                      />)}
+              
+                      </td>
+                      <td>
+                        <input
+                          type="radio"
+                          name="odabraniArtikal"
+                          value={artikal.artikalId}
+                          checked={odabraniArtikal === artikal.artikalId}
+                          onChange={() => handleArtikalChange(artikal.artikalId)}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+            
+                </tbody>
+              </table>
+          </div>
+          
+        
         {message && (
           <div>
             <p style={{ color: 'blue' }}> Vrijeme dostave je:{message}</p>

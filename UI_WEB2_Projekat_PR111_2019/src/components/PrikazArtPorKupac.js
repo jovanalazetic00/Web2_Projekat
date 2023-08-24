@@ -59,7 +59,9 @@ return (
         ))}
       </tbody>
     </table>
-    <Link to = {`/prethodnePorudzbine/${id}`}> Nazad </Link>
+    <label className='nazad' htmlFor="/dashBoard">
+  <Link to={`/prethodnePorudzbine/${id}`}>Nazad</Link>
+</label>
     </div>
   );
 };

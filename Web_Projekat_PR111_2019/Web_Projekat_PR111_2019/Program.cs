@@ -103,7 +103,7 @@ builder.Services.AddDbContext<DBContext>(options =>
 
 builder.Services.AddHttpContextAccessor();
 
-// Dodajte konfiguraciju za autentifikaciju
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -136,9 +136,7 @@ builder.Services.AddHostedService<AzuriranjeStatusaPorudzbine>();
 
 var app = builder.Build();
 
-// ...
 
-// Konfigurišite HTTP zahtevni tok.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

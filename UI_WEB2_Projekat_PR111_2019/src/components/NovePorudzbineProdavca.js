@@ -80,7 +80,7 @@ return (
     </tbody>
   </table>
 
-   <Link to="/dashBoard">Dash Board</Link> 
+  <label className='nazad' htmlFor="/dashBoard"> <Link to="/dashBoard">Dash Board</Link> </label>
   </div>
 );
 };

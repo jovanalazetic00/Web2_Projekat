@@ -5,14 +5,12 @@ import {PotvrdaRegistracije, OdbijRegistraciju} from "../services/PotvrdaRegistr
 
 
 const PotvrdiRegistraciju = () => {
-  //const [korisnik, setKorisnik] = useState([]);
   const [id, setID] = useState([]);
   const [idd, setIDD] = useState([]);
   
   const handlePotvrdiRegistraciju = async (id) => {
     try {
       await PotvrdaRegistracije(id);
-      //setKorisnik(prodavac.filter((kor) => kor.korisnikID !== id));
       setID('');
      
     } catch (error) {

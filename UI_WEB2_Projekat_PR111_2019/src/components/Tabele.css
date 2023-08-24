@@ -1,4 +1,4 @@
-/* Pocetna.css */
+
 
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
 
@@ -13,6 +13,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  background-color: rgba(255, 255, 255, 0.7); 
 }
 
 h2 {
@@ -120,28 +121,6 @@ h2 {
   color: green;
   margin-top: 10px;
 }
-
-
-
-.porudzbina-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.artikli-lista {
-  flex: 1;
-  padding: 20px;
-}
-
-.forma-narucivanja {
-  flex: 1;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-}
-
 
 /* Stilovi za tabele */
 table {
